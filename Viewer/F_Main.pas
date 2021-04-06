@@ -76,8 +76,8 @@ type
 var
   FrmPrincipal: TFrmPrincipal;
 
-  Const Token = '';
-  Const wallet = '';
+  Const Token = 'Your Toke Hiveos';
+  Const wallet = 'Your wallet mining Nicehash';
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
   Const NiceApi = 'https://api2.nicehash.com/main/api/v2';
 
