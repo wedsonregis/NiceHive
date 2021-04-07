@@ -65,7 +65,7 @@ type
   private
     { Private declarations }
     series : TActivityGauge;
-    Dashboard : TRootDash;
+    DashboardMain : TRootDash;
     Function  CreateDashboard(Token, Wallet : String) : boolean;
     Procedure ShowDashboard();
     Procedure CreateGauge ();
@@ -78,6 +78,8 @@ var
 
   Const Token = 'Your Toke Hiveos';
   Const wallet = 'Your wallet mining Nicehash';
+
+
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
   Const NiceApi = 'https://api2.nicehash.com/main/api/v2';
 
@@ -100,12 +102,12 @@ end;
 procedure TFrmPrincipal.ShowDashboard;
 begin
       CreateGauge();
-      Lbl_HashValue.Text := Dashboard.GetHashRate;
-      Lbl_PowerValue.Text :=  Dashboard.GetPower;
-      Lbl_ASRValue.Text :=  Dashboard.GetGpuStats;
+      Lbl_HashValue.Text := DashboardMain.GetHashRate;
+      Lbl_PowerValue.Text :=  DashboardMain.GetPower;
+      Lbl_ASRValue.Text :=  DashboardMain.GetGpuStats;
 
-      Lbl_UnpaidAmountValue.Text := 'R$'+formatfloat('0.00',Dashboard.getUnpaidAmount * 332095.44);
-      Lbl_ProfitabilityValue.Text :=  'R$'+formatfloat('0.00',Dashboard.getProfitability * 332095.44);
+      Lbl_UnpaidAmountValue.Text := 'R$'+formatfloat('0.00',DashboardMain.getUnpaidAmount * 332095.44);
+      Lbl_ProfitabilityValue.Text :=  'R$'+formatfloat('0.00',DashboardMain.getProfitability * 332095.44);
 end;
 
 procedure TFrmPrincipal.Butt_reloadClick(Sender: TObject);
@@ -141,23 +143,23 @@ begin
           begin
                 HiveFarmList := TRootFarms.Create;
                 HiveFarmList.AsJson := LResponse.Content;
-                if Assigned(Dashboard) then
-                      Dashboard.Free;
+                if Assigned(DashboardMain) then
+                      DashboardMain.Free;
 
-                Dashboard := TRootDash.Create;
+                DashboardMain := TRootDash.Create;
         //for
           for I := 0 to pred(HiveFarmList.Data.Count) do
              begin
-                 Dashboard.HashRate:= HiveFarmList.Data[i].GetHashRate;
-                 Dashboard.PowerDraw:= HiveFarmList.Data[i].Stats.Power_Draw;
-                 dashboard.ASR := HiveFarmList.Data[i].Stats.Asr;
-                 Dashboard.FarmOnline := HiveFarmList.Data[i].Stats.Rigs_Online;
-                 Dashboard.FarmOffiline := HiveFarmList.Data[i].Stats.Rigs_Offline;
-                 Dashboard.GpusTotal := HiveFarmList.Data[i].Stats.Gpus_Total;
-                 Dashboard.GpusOnline := HiveFarmList.Data[i].Stats.Gpus_Online;
-                 Dashboard.GpusOffline := HiveFarmList.Data[i].Stats.Gpus_Offline;
-                 Dashboard.GpusOverheated := HiveFarmList.Data[i].Stats.Gpus_Overheated;
-                 Dashboard.SetFarms(HiveFarmList.GetData);
+                 DashboardMain.HashRate:= HiveFarmList.Data[i].GetHashRate;
+                 DashboardMain.PowerDraw:= HiveFarmList.Data[i].Stats.Power_Draw;
+                 DashboardMain.ASR := HiveFarmList.Data[i].Stats.Asr;
+                 DashboardMain.FarmOnline := HiveFarmList.Data[i].Stats.Rigs_Online;
+                 DashboardMain.FarmOffiline := HiveFarmList.Data[i].Stats.Rigs_Offline;
+                 DashboardMain.GpusTotal := HiveFarmList.Data[i].Stats.Gpus_Total;
+                 DashboardMain.GpusOnline := HiveFarmList.Data[i].Stats.Gpus_Online;
+                 DashboardMain.GpusOffline := HiveFarmList.Data[i].Stats.Gpus_Offline;
+                 DashboardMain.GpusOverheated := HiveFarmList.Data[i].Stats.Gpus_Overheated;
+                 DashboardMain.SetFarms(HiveFarmList.GetData);
              end;
           end;
 
@@ -170,8 +172,8 @@ begin
       begin
           NiceHashRig2 := TRootNicehashRig2.Create;
           NiceHashRig2.AsJson := LResponse.Content;
-          Dashboard.UnpaidAmount := NiceHashRig2.UnpaidAmount;
-          Dashboard.Profitability :=  NiceHashRig2.TotalProfitability;
+          DashboardMain.UnpaidAmount := NiceHashRig2.UnpaidAmount;
+          DashboardMain.Profitability :=  NiceHashRig2.TotalProfitability;
       end;
 
       TThread.Synchronize(nil, procedure
@@ -194,19 +196,19 @@ begin
           Chart_Gauge.RemoveAllSeries;
 
       Chart_Gauge.AddSeries(series);
-      series.FillSampleValues(Dashboard.Farms.Count);
+      series.FillSampleValues(DashboardMain.Farms.Count);
 
       series.CenterText.Shape.Font.Color := TAlphaColors.Orange;
       series.CenterText.Shape.Font.Size := 55;
-      series.CenterText.Text := inttostr(Dashboard.FarmOnline) +'/'+ inttostr(Length(series.ActivityValues));
+      series.CenterText.Text := inttostr(DashboardMain.FarmOnline) +'/'+ inttostr(Length(series.ActivityValues));
 
-  for I := 0 to pred(Dashboard.Farms.Count)  do
+  for I := 0 to pred(DashboardMain.Farms.Count)  do
     begin
 
-      if (Dashboard.Farms[i].Stats.Workers_Total > 0) then
+      if (DashboardMain.Farms[i].Stats.Workers_Total > 0) then
         begin
             series.ActivityValues[i].Value := 100;
-            series.ActivityValues[i].Color := Dashboard.TfColor(i);
+            series.ActivityValues[i].Color := DashboardMain.TfColor(i);
             Chart_Gauge.Hover.Visible := true;
             Chart_Gauge.Enabled := true;
         end
@@ -235,7 +237,7 @@ begin
       if (NOT  FloatAnimation1.Inverse) then
                CreateDashboard(Token,Wallet)
              else
-              //  Run Rest Worker
+             // F_FarmStatistics.CreateWorker(token,'388939');
 end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
@@ -255,8 +257,8 @@ end;
 
 procedure TFrmPrincipal.FormDestroy(Sender: TObject);
 begin
-  if Assigned(Dashboard) then
-      Dashboard.Free;
+  if Assigned(DashboardMain) then
+      DashboardMain.Free;
 end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);

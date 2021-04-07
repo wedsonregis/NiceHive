@@ -68,8 +68,8 @@ type
     FHashratesArray: TArray<THashratesDTO>;
     [GenericListReflect]
     FHashrates: TObjectList<THashratesDTO>;
-    function GetHashrates: TObjectList<THashratesDTO>;
   published
+    function GetHashrates: TObjectList<THashratesDTO>;
     property Hashrates: TObjectList<THashratesDTO> read GetHashrates;
     destructor Destroy; override;
   end;
@@ -115,7 +115,7 @@ type
     destructor Destroy; override;
   end;
 
-  TDataDTO = class
+  TDataWorkerDTO = class
   private
     FActive: Boolean;
     FDescription: string;
@@ -150,12 +150,13 @@ type
   TRootWorkerinFarm = class(TJsonDTO)
   private
     [JSONName('data')]
-    FDataArray: TArray<TDataDTO>;
+    FDataArray: TArray<TDataWorkerDTO>;
     [GenericListReflect]
-    FData: TObjectList<TDataDTO>;
-    function GetData: TObjectList<TDataDTO>;
+    FData: TObjectList<TDataWorkerDTO>;
+  Public
+    function GetData: TObjectList<TDataWorkerDTO>;
   published
-    property Data: TObjectList<TDataDTO> read GetData;
+    property Data: TObjectList<TDataWorkerDTO> read GetData;
     destructor Destroy; override;
   end;
 
@@ -213,14 +214,14 @@ end;
 
 { TDataDTO }
 
-constructor TDataDTO.Create;
+constructor TDataWorkerDTO.Create;
 begin
   inherited;
   FStats := TStatsDTO.Create;
   FMiners_Summary := TMiners_SummaryDTO.Create;
 end;
 
-destructor TDataDTO.Destroy;
+destructor TDataWorkerDTO.Destroy;
 begin
   FStats.Free;
   FMiners_Summary.Free;
@@ -228,7 +229,7 @@ begin
   inherited;
 end;
 
-function TDataDTO.GetGpu_Stats: TObjectList<TGpu_StatsDTO>;
+function TDataWorkerDTO.GetGpu_Stats: TObjectList<TGpu_StatsDTO>;
 begin
   if not Assigned(FGpu_Stats) then
   begin
@@ -247,11 +248,11 @@ begin
   inherited;
 end;
 
-function TRootWorkerinFarm.GetData: TObjectList<TDataDTO>;
+function TRootWorkerinFarm.GetData: TObjectList<TDataWorkerDTO>;
 begin
   if not Assigned(FData) then
   begin
-    FData := TObjectList<TDataDTO>.Create;
+    FData := TObjectList<TDataWorkerDTO>.Create;
     FData.AddRange(FDataArray);
   end;
   Result := FData;

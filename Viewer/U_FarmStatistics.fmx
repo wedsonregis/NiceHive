@@ -1058,6 +1058,7 @@ object F_FarmStatistics: TF_FarmStatistics
       StyleLookup = 'refreshtoolbutton'
       TabOrder = 10
       Text = 'Button1'
+      OnClick = butt_ReloadClick
     end
   end
 end

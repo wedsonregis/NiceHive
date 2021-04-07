@@ -5,13 +5,13 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
-  FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls,
+  FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls ,
 
   // Teclado...
   FMX.VirtualKeyboard, FMX.Platform, FMXTee.Series, FMXTee.Series.OHLC,
   FMXTee.Series.Candle, FMXTee.Engine, FMXTee.Tools, FMXTee.Tools.PageNumber,
   FMXTee.Series.Donut, FMXTee.Procs, FMXTee.Chart, FMX.Effects,
-  FMX.Filter.Effects;
+  FMX.Filter.Effects, Workers, WorkerinFarm;
 
 type
   TF_FarmStatistics = class(TForm)
@@ -52,10 +52,14 @@ type
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure butt_DockerClick(Sender: TObject);
+    procedure butt_ReloadClick(Sender: TObject);
   private
     { Private declarations }
+    DashboardWorker : TRootWorkers;
+    Procedure ShowWorker();
   public
     { Public declarations }
+    Procedure  CreateWorker(Token, FarmID :string);
   end;
 
 var
@@ -65,30 +69,59 @@ implementation
 
 {$R *.fmx}
 
-uses F_Main;
+uses F_Main, RESTRequest4D, Loading;
 
 
 procedure TF_FarmStatistics.butt_DockerClick(Sender: TObject);
 begin
     Close;
-     { // Worker by FarmID
-       FarmID := inttostr(ListFarm.Data[1].Id);
+end;
 
-        LResponse := TRequest.New.BaseURL( HiveApi +'/farms/'+FarmID+'/workers')
+procedure TF_FarmStatistics.butt_ReloadClick(Sender: TObject);
+begin
+    CreateWorker(Token,'388939');
+end;
+
+
+
+procedure TF_FarmStatistics.CreateWorker(Token, FarmID: string);
+begin
+  TLoading.Show(F_FarmStatistics, 'Loading data');
+  TThread.CreateAnonymousThread(procedure
+      var
+        LResponse: IResponse;
+        WorkerHiveos : TRootWorkerinFarm;
+    begin
+      // GET in nicehash
+      LResponse := TRequest.New.BaseURL(HiveApi +'/farms/'+FarmID+'/workers')
           .Accept('application/json')
           .Token('bearer '+token)
           .Get;
 
-        if LResponse.StatusCode = 200 then
-            begin
-                Worker := TRootWorkerinFarm.Create;
-                Worker.AsJson := LResponse.Content;
-            end;
-     }
+      if LResponse.StatusCode = 200 then
+      begin
+          WorkerHiveos := TRootWorkerinFarm.Create;
+          WorkerHiveos.AsJson := LResponse.Content;
+
+          if Assigned(DashboardWorker) then
+             DashboardWorker.Free;
+
+          DashboardWorker := TRootWorkers.Create;
+          DashboardWorker.SetWorkerList(WorkerHiveos.getdata);
+      end;
+
+      TThread.Synchronize(nil, procedure
+      begin
+              TLoading.Hide;
+              ShowWorker();
+              WorkerHiveos.free;
+      end);
+    end).Start;
 end;
 
 procedure TF_FarmStatistics.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+    DashboardWorker.free;
     Action := TCloseAction.caFree;
     F_FarmStatistics := nil;
     FrmPrincipal.FloatAnimation1.Start;
@@ -120,6 +153,11 @@ begin
         end;
     end;
     {$ENDIF}
+end;
+
+procedure TF_FarmStatistics.ShowWorker;
+begin
+   ShowMessage('teate ' + DashboardWorker.WorkerList[0].Name);
 end;
 
 end.

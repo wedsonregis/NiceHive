@@ -35,8 +35,8 @@
     <Transaction>2021/04/04 16:02:09.000.548,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.pas</Transaction>
     <Transaction>2021/04/04 16:02:09.000.582,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.Response.Client.pas</Transaction>
     <Transaction>2021/04/04 16:02:09.000.605,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.Response.NetHTTP.pas</Transaction>
-    <Transaction>2021/04/04 16:02:09.000.559,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.Request.Client.pas</Transaction>
     <Transaction>2021/04/04 16:02:09.000.753,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.Utils.pas</Transaction>
+    <Transaction>2021/04/04 16:02:09.000.559,=C:\Users\sinho\Desktop\NiceHive\Control\REST\RESTRequest4D.Request.Client.pas</Transaction>
     <Transaction>2021/04/04 16:14:13.000.778,=C:\Users\sinho\Desktop\NiceHive\Unit1.pas</Transaction>
     <Transaction>2021/04/04 16:50:33.000.133,C:\Users\sinho\Desktop\NiceHive\Unit1.pas=C:\Users\sinho\Desktop\NiceHive\Control\DashControl\Dashboard.pas</Transaction>
     <Transaction>2021/04/04 19:12:58.000.504,=C:\Users\sinho\Desktop\NiceHive\Unit1.pas</Transaction>
@@ -46,6 +46,7 @@
     <Transaction>2021/04/05 02:04:32.000.728,=C:\Users\sinho\Desktop\NiceHive\Viewer\Loading.pas</Transaction>
     <Transaction>2021/04/05 17:38:37.000.810,=C:\Users\sinho\Desktop\NiceHive\Model\NicehashRig2.pas</Transaction>
     <Transaction>2021/04/05 19:34:01.000.158,C:\Users\sinho\Desktop\NiceHive\NiceHive.dproj=C:\Users\sinho\Desktop\NiceHive\NiceHive.dproj</Transaction>
+    <Transaction>2021/04/07 17:07:18.250,=D:\NiceHive App\Control\DashControl\Workers.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="" iOSSimulator="iPhone5" Android64=""/>

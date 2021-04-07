@@ -72,7 +72,7 @@ type
     property Workers_Total: Integer read FWorkers_Total write FWorkers_Total;
   end;
 
-  TDataDTO = class
+  TDataFarmDTO = class
   private
     [JSONName('hashrates')]
     FHashratesArray: TArray<THashratesDTO>;
@@ -100,13 +100,13 @@ type
   TRootFarms = class(TJsonDTO)
   private
     [JSONName('data')]
-    FDataArray: TArray<TDataDTO>;
+    FDataArray: TArray<TDataFarmDTO>;
     [GenericListReflect]
-    FData: TObjectList<TDataDTO>;
+    FData: TObjectList<TDataFarmDTO>;
 
   published
-    function GetData: TObjectList<TDataDTO>;
-    property Data: TObjectList<TDataDTO> read GetData;
+    function GetData: TObjectList<TDataFarmDTO>;
+    property Data: TObjectList<TDataFarmDTO> read GetData;
     destructor Destroy; override;
 
   end;
@@ -118,20 +118,20 @@ uses
 
 { TDataDTO }
 
-constructor TDataDTO.Create;
+constructor TDataFarmDTO.Create;
 begin
   inherited;
   FStats := TStatsDTO.Create;
 end;
 
-destructor TDataDTO.Destroy;
+destructor TDataFarmDTO.Destroy;
 begin
   FStats.Free;
   GetHashrates.Free;
   inherited;
 end;
 
-function TDataDTO.GetHashrate: integer;
+function TDataFarmDTO.GetHashrate: integer;
 var
   i,hash :integer;
 begin
@@ -145,7 +145,7 @@ begin
     result := hash;
 end;
 
-function TDataDTO.GetHashRates: TObjectList<THashratesDTO>;
+function TDataFarmDTO.GetHashRates: TObjectList<THashratesDTO>;
 begin
   if not Assigned(FHashrates) then
   begin
@@ -167,11 +167,11 @@ begin
   inherited;
 end;
 
-function TRootFarms.GetData: TObjectList<TDataDTO>;
+function TRootFarms.GetData: TObjectList<TDataFarmDTO>;
 begin
   if not Assigned(FData) then
   begin
-    FData := TObjectList<TDataDTO>.Create;
+    FData := TObjectList<TDataFarmDTO>.Create;
     FData.AddRange(FDataArray);
   end;
   Result := FData;

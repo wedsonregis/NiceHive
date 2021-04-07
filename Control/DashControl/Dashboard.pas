@@ -3,7 +3,7 @@ unit Dashboard;
 interface
 
 uses
-  Pkg.Json.DTO, System.Generics.Collections, REST.Json.Types, ListFarm,
+  Pkg.Json.DTO, System.Generics.Collections, ListFarm,
   System.UITypes;
 
 {$M+}
@@ -20,8 +20,8 @@ type
     FProfitability: Double;
     FUnpaidAmount: String;
     FWallet: Double;
-    FDataArray: TArray<TDataDTO>;
-    FFarms: TObjectList<TDataDTO>;
+    FDataArray: TArray<TDataFarmDTO>;
+    FFarms: TObjectList<TDataFarmDTO>;
     FGpusTotal: integer;
     FGpusOffline: integer;
     FGpusOverheated: integer;
@@ -39,7 +39,7 @@ type
     procedure SetGpusTotal(const Value: integer);
 
   published
-    procedure SetFarms(const Value: TObjectList<TDataDTO>);
+    procedure SetFarms(const Value: TObjectList<TDataFarmDTO>);
 
     property ASR: Double read FASR write FASR;
     property FarmOffiline: Integer  read FFarmOffiline write SetFarmOffiline;
@@ -50,7 +50,7 @@ type
     property Profitability: Double read FProfitability write SetProfitability;
     property UnpaidAmount: String read FUnpaidAmount write SetUnpaidAmount;
     property Wallet: Double read FWallet write FWallet;
-    Property Farms : TObjectList<TDataDTO> read FFarms write SetFarms;
+    Property Farms : TObjectList<TDataFarmDTO> read FFarms write SetFarms;
 
     Property GpusTotal : integer read FGpusTotal write SetGpusTotal;
     Property GpusOnline : integer read FGpusOnline write SetGpusOnline;
@@ -68,7 +68,7 @@ type
     Function GetGpuStats():string;
     Function getUnpaidAmount():Double;
     Function getProfitability():Double;
-    function GetData: TObjectList<TDataDTO>;
+    function GetData: TObjectList<TDataFarmDTO>;
   end;
 
 implementation
@@ -101,11 +101,11 @@ begin
   inherited;
 end;
 
-function TRootDash.GetData: TObjectList<TDataDTO>;
+function TRootDash.GetData: TObjectList<TDataFarmDTO>;
 begin
   if not Assigned(FFarms) then
   begin
-    FFarms := TObjectList<TDataDTO>.Create;
+    FFarms := TObjectList<TDataFarmDTO>.Create;
     FFarms.AddRange(FDataArray);
   end;
   Result := FFarms;
@@ -136,7 +136,7 @@ begin
 end;
 
 
-procedure TRootDash.SetFarms(const Value: TObjectList<TDataDTO>);
+procedure TRootDash.SetFarms(const Value: TObjectList<TDataFarmDTO>);
 begin
   FFarms := Value;
 end;
