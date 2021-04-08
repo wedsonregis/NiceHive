@@ -8,7 +8,8 @@ uses
   FMX.Layouts, FMX.ListBox, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Ani,
   FMXTee.Engine, FMXTee.Series, FMXTee.Series.OHLC, FMXTee.Series.Candle,
   FMXTee.Procs, FMXTee.Chart, FMX.Effects, FMX.Filter.Effects,ListFarm, WorkerinFarm,
-  Dashboard, FMXTee.Series.ActivityGauge, NicehashRig2
+  Dashboard, FMXTee.Series.ActivityGauge, NicehashRig2,
+  FMXTee.Tools, FMXTee.Tools.PageNumber, FMXTee.Series.Donut
    {$IFDEF Android}
     ,Androidapi.Helpers,FMX.Helpers.Android,
     Androidapi.JNI.GraphicsContentViewText
@@ -30,7 +31,6 @@ type
     FillRGBEffect1: TFillRGBEffect;
     Chart_line: TChart;
     Series4: TCandleSeries;
-    Chart_Gauge: TChart;
     Lay_bottom: TLayout;
     FlowLay_botom: TFlowLayout;
     Lay_Hashrate: TLayout;
@@ -53,31 +53,39 @@ type
     Lay_InPay: TLayout;
     Lbl_ProfitabilityValue: TLabel;
     Lbl_ProfitabilityCaption: TLabel;
+    Chart_GPU: TChart;
+    Lbl_Gputemp: TLabel;
+    Series1: TDonutSeries;
     procedure FloatAnimation1Finish(Sender: TObject);
     procedure OpenFormEfect;
     procedure FormCreate(Sender: TObject);
     procedure Butt_reloadClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure Chart_GaugeClickSeries(Sender: TCustomChart; Series: TChartSeries;
+    procedure Chart_GPUClickSeries(Sender: TCustomChart; Series: TChartSeries;
       ValueIndex: Integer; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
   private
     { Private declarations }
     series : TActivityGauge;
+    HiveFarmList : TRootFarms;
     DashboardMain : TRootDash;
+
     Function  CreateDashboard(Token, Wallet : String) : boolean;
     Procedure ShowDashboard();
     Procedure CreateGauge ();
   public
     { Public declarations }
+    WorkerId : integer;
   end;
 
 var
   FrmPrincipal: TFrmPrincipal;
 
-  Const Token = 'Your Toke Hiveos';
+  Const Token = 'Your tokem hiveos';
   Const wallet = 'Your wallet mining Nicehash';
+
+
 
 
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
@@ -115,11 +123,13 @@ begin
    CreateDashboard(Token,Wallet);
 end;
 
-procedure TFrmPrincipal.Chart_GaugeClickSeries(Sender: TCustomChart;
+procedure TFrmPrincipal.Chart_GPUClickSeries(Sender: TCustomChart;
   Series: TChartSeries; ValueIndex: Integer; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-    OpenFormEfect;
+   OpenFormEfect;
+   WorkerId := DashboardMain.Farms[ValueIndex].Id;
+   //showmessage(IntToStr(WorkerId));
 end;
 
 function TFrmPrincipal.CreateDashboard(Token, Wallet: String): boolean;
@@ -131,7 +141,6 @@ begin
         LResponse: IResponse;
         i : integer;
         NiceHashRig2 : TRootNicehashRig2;
-        HiveFarmList : TRootFarms;
     begin
      // FarmList
 
@@ -141,8 +150,13 @@ begin
           .Get;
         if LResponse.StatusCode = 200 then
           begin
+
+                if Assigned(HiveFarmList) then
+                    HiveFarmList.Free;
+
                 HiveFarmList := TRootFarms.Create;
                 HiveFarmList.AsJson := LResponse.Content;
+
                 if Assigned(DashboardMain) then
                       DashboardMain.Free;
 
@@ -181,7 +195,6 @@ begin
               TLoading.Hide;
               ShowDashboard;
               NiceHashRig2.free;
-              HiveFarmList.Free;
       end);
     end).Start;
 
@@ -190,37 +203,25 @@ end;
 procedure TFrmPrincipal.CreateGauge;
 var i : integer;
 begin
-    if not Assigned(series) then
-          series := TActivityGauge.Create(self)
-        else
-          Chart_Gauge.RemoveAllSeries;
+  Chart_GPU.Series[0].Clear;
 
-      Chart_Gauge.AddSeries(series);
-      series.FillSampleValues(DashboardMain.Farms.Count);
+  for I := 0 to pred(DashboardMain.Farms.Count) do
+  begin
+   With Chart_GPU.Series[0] do
+      begin
+        if DashboardMain.Farms[i].Stats.Workers_Online > 0 then
 
-      series.CenterText.Shape.Font.Color := TAlphaColors.Orange;
-      series.CenterText.Shape.Font.Size := 55;
-      series.CenterText.Text := inttostr(DashboardMain.FarmOnline) +'/'+ inttostr(Length(series.ActivityValues));
-
-  for I := 0 to pred(DashboardMain.Farms.Count)  do
-    begin
-
-      if (DashboardMain.Farms[i].Stats.Workers_Total > 0) then
-        begin
-            series.ActivityValues[i].Value := 100;
-            series.ActivityValues[i].Color := DashboardMain.TfColor(i);
-            Chart_Gauge.Hover.Visible := true;
-            Chart_Gauge.Enabled := true;
-        end
-          else
-        begin
-            series.ActivityValues[i].Value := 0;
-            series.ActivityValues[i].Color := TAlphaColor($57E36060);
-        end;
-          series.ActivityValues[i].BackColor := TAlphaColor($FF8d5d80);
-    end;
+        add (DashboardMain.Farms[i].Id,DashboardMain.Farms[i].Name,DashboardMain.TfColor(i))
+         else
+         Add(DashboardMain.Farms[i].Id,DashboardMain.Farms[i].Name,TAlphaColor($57E36060))
+      end;
+       Lbl_Gputemp.Text := inttostr(DashboardMain.FarmOnline) +'/'+ inttostr(DashboardMain.Farms.Count);
+  end;
 
 end;
+
+
+
 
 procedure TFrmPrincipal.FloatAnimation1Finish(Sender: TObject);
 begin
@@ -235,9 +236,9 @@ begin
 
     FloatAnimation1.Inverse := NOT FloatAnimation1.Inverse;
       if (NOT  FloatAnimation1.Inverse) then
-               CreateDashboard(Token,Wallet)
+             //  CreateDashboard(Token,Wallet)
              else
-             // F_FarmStatistics.CreateWorker(token,'388939');
+     //F_FarmStatistics.CreateWorker(token,IntToStr(DashboardMain.workerid));
 end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
@@ -259,6 +260,7 @@ procedure TFrmPrincipal.FormDestroy(Sender: TObject);
 begin
   if Assigned(DashboardMain) then
       DashboardMain.Free;
+  HiveFarmList.Free;
 end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);

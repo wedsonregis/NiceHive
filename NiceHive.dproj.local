@@ -46,10 +46,10 @@
     <Transaction>2021/04/05 02:04:32.000.728,=C:\Users\sinho\Desktop\NiceHive\Viewer\Loading.pas</Transaction>
     <Transaction>2021/04/05 17:38:37.000.810,=C:\Users\sinho\Desktop\NiceHive\Model\NicehashRig2.pas</Transaction>
     <Transaction>2021/04/05 19:34:01.000.158,C:\Users\sinho\Desktop\NiceHive\NiceHive.dproj=C:\Users\sinho\Desktop\NiceHive\NiceHive.dproj</Transaction>
-    <Transaction>2021/04/07 17:07:18.250,=D:\NiceHive App\Control\DashControl\Workers.pas</Transaction>
+    <Transaction>2021/04/07 17:07:18.000.250,=D:\NiceHive App\Control\DashControl\Workers.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="" iOSSimulator="iPhone5" Android64=""/>
+		<NoProfile Android="5caf2b50" iOSSimulator="iPhone5" Android64=""/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

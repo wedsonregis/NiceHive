@@ -5,7 +5,7 @@
     </ProjectExtensions>
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'">5caf2b50</DeviceId>
-        <DeviceId Condition="'$(Platform)'=='Android64'">5caf2b50</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'"/>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
         <DeployFile Include="Win32\Debug\NiceHive.exe" Condition="'$(Config)'=='Debug'">

@@ -26,6 +26,7 @@ type
     FGpusOffline: integer;
     FGpusOverheated: integer;
     FGpusOnline: integer;
+    FWorkerId: integer;
 
     procedure SetFarmOffiline(const Value: Integer);
     procedure SetFarmOnline(const Value: Integer);
@@ -37,6 +38,7 @@ type
     procedure SetGpusOnline(const Value: integer);
     procedure SetGpusOverheated(const Value: integer);
     procedure SetGpusTotal(const Value: integer);
+    procedure SetWorkerId(const Value: integer);
 
   published
     procedure SetFarms(const Value: TObjectList<TDataFarmDTO>);
@@ -50,6 +52,7 @@ type
     property Profitability: Double read FProfitability write SetProfitability;
     property UnpaidAmount: String read FUnpaidAmount write SetUnpaidAmount;
     property Wallet: Double read FWallet write FWallet;
+    property WorkerId : integer read FWorkerId write SetWorkerId;
     Property Farms : TObjectList<TDataFarmDTO> read FFarms write SetFarms;
 
     Property GpusTotal : integer read FGpusTotal write SetGpusTotal;
@@ -215,6 +218,11 @@ end;
 procedure TRootDash.SetUnpaidAmount(const Value: string);
 begin
   FUnpaidAmount := DotsChanger(Value);
+end;
+
+procedure TRootDash.SetWorkerId(const Value: integer);
+begin
+  FWorkerId := Value;
 end;
 
 end.

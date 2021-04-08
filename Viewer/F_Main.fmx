@@ -2,8 +2,9 @@ object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 730
-  ClientWidth = 388
+  ClientHeight = 791
+  ClientWidth = 369
+  Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -14,8 +15,8 @@ object FrmPrincipal: TFrmPrincipal
   object Rec_ground: TRectangle
     Align = Client
     Fill.Color = xFF4B2A4F
-    Size.Width = 388.000000000000000000
-    Size.Height = 730.000000000000000000
+    Size.Width = 369.000000000000000000
+    Size.Height = 791.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
   end
@@ -45,16 +46,16 @@ object FrmPrincipal: TFrmPrincipal
   end
   object Lay_content: TLayout
     Align = Client
-    Size.Width = 388.000000000000000000
-    Size.Height = 730.000000000000000000
+    Size.Width = 369.000000000000000000
+    Size.Height = 791.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 10
     object Lay_top: TLayout
       Align = Top
-      Size.Width = 388.000000000000000000
+      Size.Width = 369.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 1
+      TabOrder = 0
       object Butt_doker: TButton
         Align = Left
         Size.Width = 48.000000000000000000
@@ -80,7 +81,7 @@ object FrmPrincipal: TFrmPrincipal
       end
       object Butt_reload: TButton
         Align = Right
-        Position.X = 340.000000000000000000
+        Position.X = 321.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
@@ -94,7 +95,7 @@ object FrmPrincipal: TFrmPrincipal
       end
     end
     object Chart_line: TChart
-      Position.Y = 491.000000000000000000
+      Position.Y = 160.000000000000000000
       BackWall.Pen.Color = x2EEDEBEB
       BackWall.Pen.Fill.Color = x2EEDEBEB
       BottomWall.Pen.Visible = False
@@ -132,9 +133,9 @@ object FrmPrincipal: TFrmPrincipal
       Align = Top
       BevelOuter = bvNone
       Color = claNull
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
-      Size.Width = 378.000000000000000000
+      Size.Width = 388.000000000000000000
       Size.Height = 236.000000000000000000
       Size.PlatformDefault = False
       ColorPaletteIndex = 13
@@ -213,46 +214,19 @@ object FrmPrincipal: TFrmPrincipal
           0000E08040}
       end
     end
-    object Chart_Gauge: TChart
-      Foot.Font.StyleExt = {00040000000200000004000000}
-      Legend.Title.Font.StyleExt = {00070000000000000004000000}
-      PrintProportional = False
-      SubFoot.Font.StyleExt = {00040000000200000004000000}
-      Title.Alignment = taLeftJustify
-      Title.Font.Size = 18.891565322875980000
-      Title.Font.Color = xAEDEACAC
-      Title.Font.Brush.Color = xAEDEACAC
-      Title.Text.Strings = (
-        'Worker Ativo')
-      Title.Visible = False
-      OnClickSeries = Chart_GaugeClickSeries
-      View3D = False
-      Zoom.Brush.Kind = None
-      Zoom.Pen.Fill.Color = claSilver
-      Align = Center
-      BevelOuter = bvNone
-      Color = claNull
-      TabOrder = 0
-      Margins.Left = 5.000000000000000000
-      Margins.Right = 5.000000000000000000
-      Size.Width = 378.000000000000000000
-      Size.Height = 299.000000000000000000
-      Size.PlatformDefault = False
-      ColorPaletteIndex = 14
-    end
     object Lay_bottom: TLayout
       Align = Bottom
       Margins.Bottom = 10.000000000000000000
-      Position.Y = 610.000000000000000000
-      Size.Width = 388.000000000000000000
+      Position.Y = 671.000000000000000000
+      Size.Width = 369.000000000000000000
       Size.Height = 110.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 13
+      TabOrder = 12
       object FlowLay_botom: TFlowLayout
         Align = Client
         Margins.Left = 5.000000000000000000
         Margins.Right = 5.000000000000000000
-        Size.Width = 378.000000000000000000
+        Size.Width = 359.000000000000000000
         Size.Height = 110.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -264,7 +238,7 @@ object FrmPrincipal: TFrmPrincipal
         object Lay_Hashrate: TLayout
           Margins.Top = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
-          Position.X = 10.000000000000000000
+          Position.X = 0.500000000000000000
           Position.Y = 5.000000000000000000
           Size.Width = 112.000000000000000000
           Size.Height = 105.000000000000000000
@@ -301,7 +275,7 @@ object FrmPrincipal: TFrmPrincipal
         object Lay_Power: TLayout
           Margins.Top = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
-          Position.X = 132.000000000000000000
+          Position.X = 122.500000000000000000
           Position.Y = 5.000000000000000000
           Size.Width = 113.000000000000000000
           Size.Height = 105.000000000000000000
@@ -338,7 +312,7 @@ object FrmPrincipal: TFrmPrincipal
         object Lay_Asr: TLayout
           Margins.Top = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
-          Position.X = 255.000000000000000000
+          Position.X = 245.500000000000000000
           Position.Y = 5.000000000000000000
           Size.Width = 113.000000000000000000
           Size.Height = 105.000000000000000000
@@ -378,15 +352,15 @@ object FrmPrincipal: TFrmPrincipal
       Align = Top
       Margins.Bottom = 10.000000000000000000
       Position.Y = 50.000000000000000000
-      Size.Width = 388.000000000000000000
+      Size.Width = 369.000000000000000000
       Size.Height = 100.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 12
+      TabOrder = 11
       object FlowLay_Top: TFlowLayout
         Align = Client
         Margins.Left = 5.000000000000000000
         Margins.Right = 5.000000000000000000
-        Size.Width = 378.000000000000000000
+        Size.Width = 359.000000000000000000
         Size.Height = 100.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -396,7 +370,6 @@ object FrmPrincipal: TFrmPrincipal
         HorizontalGap = 10.000000000000000000
         VerticalGap = 5.000000000000000000
         object Lay_Wallet: TLayout
-          Position.X = 9.500000000000000000
           Size.Width = 113.000000000000000000
           Size.Height = 98.000000000000000000
           Size.PlatformDefault = False
@@ -430,7 +403,7 @@ object FrmPrincipal: TFrmPrincipal
           end
         end
         object Lay_NextPay: TLayout
-          Position.X = 132.500000000000000000
+          Position.X = 123.000000000000000000
           Size.Width = 113.000000000000000000
           Size.Height = 98.000000000000000000
           Size.PlatformDefault = False
@@ -464,7 +437,7 @@ object FrmPrincipal: TFrmPrincipal
           end
         end
         object Lay_InPay: TLayout
-          Position.X = 255.500000000000000000
+          Position.X = 246.000000000000000000
           Size.Width = 113.000000000000000000
           Size.Height = 98.000000000000000000
           Size.PlatformDefault = False
@@ -497,6 +470,207 @@ object FrmPrincipal: TFrmPrincipal
             TabOrder = 0
           end
         end
+      end
+    end
+    object Chart_GPU: TChart
+      Position.Y = 230.000000000000000000
+      BackWall.Pen.Visible = False
+      BottomWall.Brush.Kind = Gradient
+      BottomWall.Brush.Gradient.EndColor = claSilver
+      BottomWall.Brush.Gradient.StartColor = claGray
+      BottomWall.Brush.Gradient.Visible = True
+      BottomWall.Pen.Color = claGray
+      BottomWall.Pen.Fill.Color = claGray
+      BottomWall.Transparent = True
+      Foot.Font.StyleExt = {00040000000200000004000000}
+      Gradient.Direction = gdFromTopLeft
+      Gradient.EndColor = claWhite
+      Gradient.StartColor = claSilver
+      LeftWall.Brush.Kind = Gradient
+      LeftWall.Brush.Gradient.EndColor = claSilver
+      LeftWall.Brush.Gradient.StartColor = claGray
+      LeftWall.Brush.Gradient.Visible = True
+      LeftWall.Color = claWhite
+      LeftWall.Pen.Color = claGray
+      LeftWall.Pen.Fill.Color = claGray
+      LeftWall.Transparent = True
+      Legend.Font.Family = 'Roboto Th'
+      Legend.Font.Size = 4.578313350677490000
+      Legend.Frame.Visible = False
+      Legend.LegendStyle = lsSeries
+      Legend.Shadow.Visible = False
+      Legend.Symbol.Pen.Visible = False
+      Legend.Title.Font.StyleExt = {00070000000000000004000000}
+      Legend.Title.Text.Strings = (
+        'Teste')
+      Legend.Visible = False
+      RightWall.Transparent = True
+      SubFoot.Font.StyleExt = {00040000000200000004000000}
+      Title.Alignment = taLeftJustify
+      Title.Font.Family = 'Roboto Th'
+      Title.Font.Size = 35.250000000000000000
+      Title.Font.Style = [fsBold]
+      Title.Font.Color = claBlack
+      Title.Font.Brush.Color = claBlack
+      Title.Font.Shadow.Color = claGray
+      Title.Font.Shadow.HorizSize = 1
+      Title.Font.Shadow.SmoothBlur = 2
+      Title.Font.Shadow.VertSize = 1
+      Title.Font.StyleExt = {00070000000000000004000000}
+      Title.Text.Strings = (
+        'TChart')
+      Title.Visible = False
+      OnClickSeries = Chart_GPUClickSeries
+      BottomAxis.Axis.Visible = False
+      BottomAxis.Grid.Color = x9FDDDDDD
+      BottomAxis.Grid.Fill.Color = x9FDDDDDD
+      BottomAxis.Grid.Visible = False
+      BottomAxis.LabelsFormat.Font.Family = 'Roboto Th'
+      BottomAxis.LabelsFormat.Font.Size = 18.000000000000000000
+      BottomAxis.LabelsFormat.Font.Color = claGray
+      BottomAxis.LabelsFormat.Font.Brush.Color = claGray
+      BottomAxis.MinorTicks.Visible = False
+      BottomAxis.Ticks.Color = claGray
+      BottomAxis.Ticks.Fill.Color = claGray
+      BottomAxis.TicksInner.Visible = False
+      BottomAxis.Title.Font.Family = 'Roboto Th'
+      BottomAxis.Title.Font.Size = 9.750000000000000000
+      Chart3DPercent = 45
+      DepthAxis.Title.Font.Family = 'Roboto Th'
+      DepthAxis.Title.Font.Size = 9.750000000000000000
+      DepthTopAxis.Title.Font.Family = 'Roboto Th'
+      DepthTopAxis.Title.Font.Size = 9.750000000000000000
+      Frame.Visible = False
+      LeftAxis.Axis.Visible = False
+      LeftAxis.Grid.Color = x9FDDDDDD
+      LeftAxis.Grid.Fill.Color = x9FDDDDDD
+      LeftAxis.LabelsFormat.Font.Family = 'Roboto Th'
+      LeftAxis.LabelsFormat.Font.Size = 18.000000000000000000
+      LeftAxis.LabelsFormat.Font.Color = claGray
+      LeftAxis.LabelsFormat.Font.Brush.Color = claGray
+      LeftAxis.MinorTicks.Visible = False
+      LeftAxis.TickLength = 7
+      LeftAxis.Ticks.Color = claGray
+      LeftAxis.Ticks.Fill.Color = claGray
+      LeftAxis.TicksInner.Visible = False
+      LeftAxis.Title.Font.Family = 'Roboto Th'
+      LeftAxis.Title.Font.Size = 9.750000000000000000
+      RightAxis.Grid.Visible = False
+      RightAxis.LabelsFormat.Font.Family = 'Roboto Th'
+      RightAxis.LabelsFormat.Font.Size = 23.250000000000000000
+      RightAxis.LabelsFormat.Font.Color = claGray
+      RightAxis.LabelsFormat.Font.Brush.Color = claGray
+      RightAxis.MinorTicks.Visible = False
+      RightAxis.Ticks.Visible = False
+      RightAxis.Title.Font.Family = 'Roboto Th'
+      RightAxis.Title.Font.Size = 9.750000000000000000
+      TopAxis.Title.Font.Family = 'Roboto Th'
+      TopAxis.Title.Font.Size = 9.750000000000000000
+      View3DOptions.Elevation = 314
+      View3DOptions.HorizOffset = -3
+      View3DOptions.OrthoAngle = 39
+      View3DOptions.Orthogonal = False
+      View3DOptions.Perspective = 0
+      View3DOptions.Rotation = 360
+      View3DOptions.VertOffset = 7
+      View3DOptions.ZoomText = ztNo
+      Zoom.AnimatedSteps = 10
+      Zoom.Brush.Kind = None
+      Zoom.MinimumPixels = 10
+      Zoom.Pen.Color = xF9C0C0C0
+      Zoom.Pen.Fill.Color = xF9C0C0C0
+      Align = Top
+      BevelOuter = bvNone
+      BevelWidth = 2
+      Color = claNull
+      TabOrder = 13
+      Margins.Top = 70.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 290.000000000000000000
+      Size.PlatformDefault = False
+      ColorPaletteIndex = 14
+      object Lbl_Gputemp: TLabel
+        Align = Center
+        StyledSettings = [Family]
+        Margins.Left = 5.000000000000000000
+        Size.Width = 69.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000100000004000000}
+        TextSettings.FontColor = xFFFFF3CF
+        TextSettings.HorzAlign = Center
+        Text = '0'#176
+        TabOrder = 0
+      end
+      object Series1: TDonutSeries
+        HoverElement = []
+        Marks.Font.Family = 'Roboto Th'
+        Marks.Font.Size = 18.000000000000000000
+        Marks.Font.Color = claWhite
+        Marks.Font.Brush.Color = claWhite
+        Marks.Transparent = True
+        Marks.Visible = False
+        Marks.Arrow.Color = x62FFFFFF
+        Marks.Arrow.Width = 2.325581312179565000
+        Marks.Arrow.Fill.Color = x62FFFFFF
+        Marks.Callout.Arrow.Color = x62FFFFFF
+        Marks.Callout.Arrow.Width = 2.325581312179565000
+        Marks.Callout.Arrow.Fill.Color = x62FFFFFF
+        Marks.Callout.ArrowHead = ahLine
+        Marks.Callout.ArrowHeadSize = 4
+        Marks.Callout.Distance = 9
+        Marks.Callout.Length = 11
+        Marks.Tail.Margin = 2
+        SeriesColor = x000B58F3
+        Title = 'GPU'
+        XValues.Order = loAscending
+        YValues.Name = 'Pizza'
+        YValues.Order = loNone
+        Frame.InnerBrush.Kind = Gradient
+        Frame.InnerBrush.Gradient.EndColor = claGray
+        Frame.InnerBrush.Gradient.MidColor = claWhite
+        Frame.InnerBrush.Gradient.StartColor = xFF404040
+        Frame.InnerBrush.Gradient.Visible = True
+        Frame.InnerBrush.BackColor = claRed
+        Frame.MiddleBrush.Kind = Gradient
+        Frame.MiddleBrush.Gradient.EndColor = xFF828282
+        Frame.MiddleBrush.Gradient.MidColor = claWhite
+        Frame.MiddleBrush.Gradient.StartColor = claGray
+        Frame.MiddleBrush.Gradient.Visible = True
+        Frame.MiddleBrush.BackColor = claYellow
+        Frame.OuterBrush.Kind = Gradient
+        Frame.OuterBrush.Gradient.EndColor = xFF404040
+        Frame.OuterBrush.Gradient.MidColor = claWhite
+        Frame.OuterBrush.Gradient.StartColor = claSilver
+        Frame.OuterBrush.Gradient.Visible = True
+        Frame.OuterBrush.BackColor = claGreen
+        Frame.Width = 4
+        Bevel.Percent = 6
+        BevelPercent = 6
+        OtherSlice.Legend.Title.Font.StyleExt = {00070000000000000004000000}
+        OtherSlice.Legend.Visible = False
+        PiePen.Color = x24000000
+        PiePen.Fill.Color = x24000000
+        RotationAngle = 225
+      end
+      object ChartTool1: TPageNumTool
+        Active = False
+        Shape.Text = 'P'#225'g. 1 de 1'
+        Shape.TextAlignment = taCenter
+        Shape.Visible = False
+        DisabledBrush.Kind = Gradient
+        DisabledBrush.Gradient.EndColor = claSilver
+        DisabledBrush.Gradient.Visible = True
+        DisabledButton.EndColor = claSilver
+        DisabledButton.Visible = True
+        EnabledBrush.Kind = Gradient
+        EnabledBrush.Gradient.EndColor = claSilver
+        EnabledBrush.Gradient.StartColor = claBlack
+        EnabledBrush.Gradient.Visible = True
+        EnabledButton.EndColor = claSilver
+        EnabledButton.StartColor = claBlack
+        EnabledButton.Visible = True
       end
     end
   end
