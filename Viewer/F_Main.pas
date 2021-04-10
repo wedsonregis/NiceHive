@@ -82,11 +82,10 @@ type
 var
   FrmPrincipal: TFrmPrincipal;
 
-  //Const Token = 'Your tokem hiveos';
-  //Const wallet = 'Your wallet mining Nicehash';
+  Const Token = 'Your tokem hiveos';
+  Const wallet = 'Your wallet mining Nicehash';
 
-   const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkyLmhpdmVvcy5mYXJtIiwiaWF0IjoxNjE1OTUwNjQ2LCJleHAiOjE5MzI2ODk0NDYsIm5iZiI6MTYxNTk1MDY0NiwianRpIjoyODA5MzEwNCwic3ViIjoyODA5MzEwNCwicm1iIjp0cnVlfQ.Lp5pvR4ZcUsdcTR9OUQslBXyQBgK3hHlvZqJBnuafmM';
-   const Wallet = '3GC96msH6TuhA7a8NE2NJ4xS7zwVfs6bXr';
+
 
 
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
