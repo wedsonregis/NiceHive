@@ -82,20 +82,23 @@ type
 var
   FrmPrincipal: TFrmPrincipal;
 
-  Const Token = 'Your tokem hiveos';
-  Const wallet = 'Your wallet mining Nicehash';
+  //Const Token = 'Your tokem hiveos';
+  //Const wallet = 'Your wallet mining Nicehash';
 
-
+   const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkyLmhpdmVvcy5mYXJtIiwiaWF0IjoxNjE1OTUwNjQ2LCJleHAiOjE5MzI2ODk0NDYsIm5iZiI6MTYxNTk1MDY0NiwianRpIjoyODA5MzEwNCwic3ViIjoyODA5MzEwNCwicm1iIjp0cnVlfQ.Lp5pvR4ZcUsdcTR9OUQslBXyQBgK3hHlvZqJBnuafmM';
+   const Wallet = '3GC96msH6TuhA7a8NE2NJ4xS7zwVfs6bXr';
 
 
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
   Const NiceApi = 'https://api2.nicehash.com/main/api/v2';
+  Const CoinbaseAPI = 'https://api.coinbase.com/v2';
+  Const Currency = 'BRL';
 
 implementation
 
 {$R *.fmx}
 
-uses U_FarmStatistics, RESTRequest4D, Loading;
+uses U_FarmStatistics, RESTRequest4D, Loading, CoibaseCurrency;
 
 procedure TFrmPrincipal.OpenFormEfect;
 begin
@@ -114,8 +117,10 @@ begin
       Lbl_PowerValue.Text :=  DashboardMain.GetPower;
       Lbl_ASRValue.Text :=  DashboardMain.GetGpuStats;
 
-      Lbl_UnpaidAmountValue.Text := 'R$'+formatfloat('0.00',DashboardMain.getUnpaidAmount * 332095.44);
-      Lbl_ProfitabilityValue.Text :=  'R$'+formatfloat('0.00',DashboardMain.getProfitability * 332095.44);
+      Lbl_UnpaidAmountValue.Text := 'R$'+formatfloat('0.00',DashboardMain.getUnpaidAmount
+          * DashboardMain.GetFCurrencyPair);
+      Lbl_ProfitabilityValue.Text :=  'R$'+formatfloat('0.00',DashboardMain.getProfitability
+          * DashboardMain.GetFCurrencyPair);
 end;
 
 procedure TFrmPrincipal.Butt_reloadClick(Sender: TObject);
@@ -141,6 +146,7 @@ begin
         LResponse: IResponse;
         i : integer;
         NiceHashRig2 : TRootNicehashRig2;
+        Coibase : TRootCoinbase;
     begin
      // FarmList
 
@@ -190,11 +196,25 @@ begin
           DashboardMain.Profitability :=  NiceHashRig2.TotalProfitability;
       end;
 
+       // GET in coibase
+      LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/prices/spot?currency='+Currency)
+        .Accept('application/json')
+        .Get;
+
+      if LResponse.StatusCode = 200 then
+      begin
+          Coibase := TRootCoinbase.Create;
+          Coibase.AsJson := LResponse.Content;
+          DashboardMain.CurrencyPair := Coibase.Data.Amount;
+          //DashboardMain.Currency :=  Coibase.Data.currency;
+      end;
+
       TThread.Synchronize(nil, procedure
       begin
               TLoading.Hide;
               ShowDashboard;
               NiceHashRig2.free;
+              Coibase.Free;
       end);
     end).Start;
 

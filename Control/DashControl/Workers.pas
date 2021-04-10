@@ -20,6 +20,7 @@ type
     FShareRatio: Double;
     FShareTotal: Integer;
     FShareRejected: Integer;
+    FFan: integer;
 
     procedure SetTempMax(const Value: Integer);
     procedure SetShareAccepted(const Value: Integer);
@@ -27,6 +28,7 @@ type
     procedure SetShareRatio(const Value: Double);
     procedure SetShareRejected(const Value: Integer);
     procedure SetShareTotal(const Value: Integer);
+    procedure SetFan(const Value: integer);
 
  Public
     procedure SetWorkerList(const Value: TObjectList<TDataWorkerDTO>);
@@ -41,6 +43,7 @@ type
     property ShareRatio: Double read FShareRatio write SetShareRatio;
     property ShareRejected: Integer read FShareRejected write SetShareRejected;
     property ShareTotal: Integer read FShareTotal write SetShareTotal;
+    Property Fan : integer read FFan write SetFan;
 
     Property WorkerList : TObjectList<TDataWorkerDTO> read FWorkerList write SetWorkerList;
     //
@@ -64,6 +67,7 @@ constructor TRootWorkers.Create;
 begin
   Fid := 0;
   FTempMax := 0;
+  FFan :=0;
 end;
 
 destructor TRootWorkers.Destroy;
@@ -82,6 +86,11 @@ begin
     FWorkerList.AddRange(FWorkerListArray);
   end;
   Result := FWorkerList;
+end;
+
+procedure TRootWorkers.SetFan(const Value: integer);
+begin
+  FFan :=FFan + Value;
 end;
 
 procedure TRootWorkers.SetShareAccepted(const Value: Integer);

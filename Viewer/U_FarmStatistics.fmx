@@ -2,7 +2,7 @@ object F_FarmStatistics: TF_FarmStatistics
   Left = 0
   Top = 0
   Caption = 'Farm Statistics'
-  ClientHeight = 791
+  ClientHeight = 649
   ClientWidth = 369
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -18,7 +18,7 @@ object F_FarmStatistics: TF_FarmStatistics
     Fill.Color = xFF4B2A4F
     Margins.Top = -150.000000000000000000
     Size.Width = 369.000000000000000000
-    Size.Height = 844.000000000000000000
+    Size.Height = 702.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
   end
@@ -49,19 +49,19 @@ object F_FarmStatistics: TF_FarmStatistics
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 369.000000000000000000
-    Size.Height = 694.000000000000000000
+    Size.Height = 552.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 1
     ShowScrollBars = False
     Viewport.Width = 369.000000000000000000
-    Viewport.Height = 694.000000000000000000
+    Viewport.Height = 552.000000000000000000
     object Lay_Bottom: TLayout
-      Align = Bottom
-      Position.Y = 461.000000000000000000
+      Align = Top
+      Position.Y = 426.000000000000000000
       Size.Width = 369.000000000000000000
       Size.Height = 233.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 14
+      TabOrder = 13
       object Chart_Bar: TChart
         BackWall.Size = 10
         BottomWall.Size = 10
@@ -264,7 +264,7 @@ object F_FarmStatistics: TF_FarmStatistics
       Size.Width = 369.000000000000000000
       Size.Height = 116.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 13
+      TabOrder = 12
       object FlowLayout1: TFlowLayout
         Align = Client
         Size.Width = 369.000000000000000000
@@ -892,7 +892,7 @@ object F_FarmStatistics: TF_FarmStatistics
       BevelOuter = bvNone
       BevelWidth = 2
       Color = claNull
-      TabOrder = 15
+      TabOrder = 14
       Size.Width = 369.000000000000000000
       Size.Height = 290.000000000000000000
       Size.PlatformDefault = False
@@ -988,7 +988,7 @@ object F_FarmStatistics: TF_FarmStatistics
     Size.Width = 369.000000000000000000
     Size.Height = 47.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 11
+    TabOrder = 8
     object Rec_Navigation: TRectangle
       Align = Client
       Fill.Color = claNull
@@ -1087,7 +1087,113 @@ object F_FarmStatistics: TF_FarmStatistics
     Enabled = False
     Interval = 100
     OnTimer = Timer1Timer
-    Left = 328
-    Top = 624
+    Left = 256
+    Top = 352
+  end
+  object RadiantC_Stats: TRadiantCallout
+    Fill.Color = xCFE0E0E0
+    Opacity = 0.000000000000000000
+    Position.X = 726.000000000000000000
+    Position.Y = 272.000000000000000000
+    Size.Width = 136.000000000000000000
+    Size.Height = 92.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claWhite
+    CalloutOffset = 50.000000000000000000
+    CalloutSize = 25.000000000000000000
+    CornerRadius = 15.000000000000000000
+    object Label1: TLabel
+      Align = Top
+      StyledSettings = [Family]
+      Margins.Left = 12.000000000000000000
+      Margins.Top = 6.000000000000000000
+      Position.X = 12.000000000000000000
+      Position.Y = 6.000000000000000000
+      Size.Width = 124.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = xA9000000
+      Text = 'GPU:'
+      TabOrder = 0
+      object Label3: TLabel
+        Align = Left
+        StyledSettings = [Family, Style]
+        Margins.Left = 48.000000000000000000
+        Position.X = 48.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = claPurple
+        Text = 'GPU-0'
+        TabOrder = 0
+      end
+    end
+    object Label2: TLabel
+      Align = Top
+      StyledSettings = [Family]
+      Margins.Left = 12.000000000000000000
+      Margins.Top = -7.000000000000000000
+      Position.X = 12.000000000000000000
+      Position.Y = 38.000000000000000000
+      Size.Width = 124.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = xA9000000
+      Text = 'Overheated:'
+      TabOrder = 1
+      object Label4: TLabel
+        Align = Left
+        StyledSettings = [Family, Style]
+        Margins.Left = 80.000000000000000000
+        Position.X = 80.000000000000000000
+        Size.Width = 33.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = claPurple
+        Text = 'No'
+        TabOrder = 1
+      end
+    end
+    object Label5: TLabel
+      Align = Top
+      StyledSettings = [Family]
+      Margins.Left = 12.000000000000000000
+      Margins.Top = -7.000000000000000000
+      Position.X = 12.000000000000000000
+      Position.Y = 22.000000000000000000
+      Size.Width = 124.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = xA9000000
+      Text = 'Power:'
+      TabOrder = 2
+      object Label6: TLabel
+        Align = Left
+        StyledSettings = [Family, Style]
+        Margins.Left = 48.000000000000000000
+        Position.X = 48.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = claPurple
+        Text = '130W'
+        TabOrder = 1
+      end
+    end
+    object FloatAnimation1: TFloatAnimation
+      Duration = 0.400000005960464500
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
 end

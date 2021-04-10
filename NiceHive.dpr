@@ -26,7 +26,8 @@ uses
   WorkerinFarm in 'Model\WorkerinFarm.pas',
   Loading in 'Viewer\Loading.pas',
   NicehashRig2 in 'Model\NicehashRig2.pas',
-  Workers in 'Control\DashControl\Workers.pas';
+  Workers in 'Control\DashControl\Workers.pas',
+  CoibaseCurrency in 'Model\CoibaseCurrency.pas';
 
 {$R *.res}
 

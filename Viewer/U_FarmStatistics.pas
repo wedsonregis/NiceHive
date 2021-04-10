@@ -11,7 +11,8 @@ uses
   FMX.VirtualKeyboard, FMX.Platform, FMXTee.Series, FMXTee.Series.OHLC,
   FMXTee.Series.Candle, FMXTee.Engine, FMXTee.Tools, FMXTee.Tools.PageNumber,
   FMXTee.Series.Donut, FMXTee.Procs, FMXTee.Chart, FMX.Effects,
-  FMX.Filter.Effects, Workers, WorkerinFarm, FMXTee.Import;
+  FMX.Filter.Effects, Workers, WorkerinFarm, FMXTee.Import, Radiant.Shapes,
+  FMX.Ani;
 
 type
   TF_FarmStatistics = class(TForm)
@@ -49,6 +50,14 @@ type
     Lbl_Gputemp: TLabel;
     Series1: TDonutSeries;
     ChartTool1: TPageNumTool;
+    RadiantC_Stats: TRadiantCallout;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    FloatAnimation1: TFloatAnimation;
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -66,6 +75,7 @@ type
     WorkerHiveos : TRootWorkerinFarm;
     Procedure ShowWorker(GpuIndex : integer);
     Procedure  CreateWorker(Token, FarmID :string);
+    procedure ShowHints(X: Integer; Y: Integer; Index : Integer);
   public
     { Public declarations }
   end;
@@ -99,56 +109,65 @@ procedure TF_FarmStatistics.Chart_GPUClickSeries(Sender: TCustomChart;
   Series: TChartSeries; ValueIndex: Integer; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  //  change for function
-    Lbl_Gputemp.Text := inttostr(DashboardWorker.WorkerList[0].Gpu_Stats[ValueIndex].Temp) + '°';
+    ShowHints(X, Y, ValueIndex);
 end;
 
 
 
 procedure TF_FarmStatistics.CreateWorker(Token, FarmID: string);
 begin
+try
   TLoading.Show(F_FarmStatistics, 'Loading data');
   TThread.CreateAnonymousThread(procedure
       var
         LResponse: IResponse;
-        i, GpuIndex : integer;
-    begin
-      // GET in nicehash
-      LResponse := TRequest.New.BaseURL(HiveApi +'/farms/'+FarmID+'/workers')
-          .Accept('application/json')
-          .Token('bearer '+token)
-          .Get;
-
-      if LResponse.StatusCode = 200 then
+          i, GpuIndex : integer;
       begin
-          if Assigned(WorkerHiveos) then
-             WorkerHiveos.Free;
+        // GET in nicehash
+        LResponse := TRequest.New.BaseURL(HiveApi +'/farms/'+FarmID+'/workers')
+            .Accept('application/json')
+            .Token('bearer '+token)
+            .Get;
 
-          if Assigned(DashboardWorker) then
-             DashboardWorker.Free;
+        if LResponse.StatusCode = 200 then
+        begin
+            if Assigned(WorkerHiveos) then
+               WorkerHiveos.Free;
 
-          WorkerHiveos := TRootWorkerinFarm.Create;
-          WorkerHiveos.AsJson := LResponse.Content;
+            if Assigned(DashboardWorker) then
+               DashboardWorker.Free;
 
-          DashboardWorker := TRootWorkers.Create;
-          DashboardWorker.SetWorkerList(WorkerHiveos.getdata);
+            WorkerHiveos := TRootWorkerinFarm.Create;
+            WorkerHiveos.AsJson := LResponse.Content;
 
-          // GPU status
-          for GpuIndex := 0 to pred(WorkerHiveos.data.Count) do
-            begin
-             for I := 0 to pred(WorkerHiveos.data[GpuIndex].Gpu_Stats.Count) do
-                 begin
-                  DashboardWorker.TempMax :=  WorkerHiveos.data[GpuIndex].Gpu_Stats[i].Temp;
-                 end;
-            end;
-      end;
+            DashboardWorker := TRootWorkers.Create;
+            DashboardWorker.SetWorkerList(WorkerHiveos.getdata);
+        end;
 
-      TThread.Synchronize(nil, procedure
-      begin
-          TLoading.Hide;
-          ShowWorker(0);
-      end);
-   end).Start;
+        TThread.Synchronize(nil, procedure
+        begin
+            TLoading.Hide;
+            ShowWorker(0);
+        end);
+     end).Start;
+    Except
+      on E: Exception do
+        begin
+            TLoading.Hide;
+            ShowMessage('Erro: ' + E.Message);
+        end;
+    end;
+
+end;
+
+procedure TF_FarmStatistics.ShowHints(X: Integer; Y: Integer; Index : Integer);
+begin
+  RadiantC_Stats.Position.X := x - 60;
+  RadiantC_Stats.Position.y := y + 145;
+  FloatAnimation1.Inverse := false;
+   FloatAnimation1.Start;
+
+  Lbl_Gputemp.Text := Chart_GPU.SeriesList[0].YValue[Index].ToString + '°';
 end;
 
 procedure TF_FarmStatistics.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -199,14 +218,13 @@ end;
 
 procedure TF_FarmStatistics.ShowWorker(GpuIndex : integer);
 var
-  i,  fan :integer;
+  i :integer;
 begin
 
   // GPU Stats temp
   Chart_GPU.Series[0].Clear;
   Chart_Fan.Series[0].Clear;
   Chart_GPUActive.Series[0].Clear;
-  Fan := 0;
 
      for I := 0 to pred(DashboardWorker.WorkerList[GpuIndex].Gpu_Stats.Count) do
        begin
@@ -218,11 +236,15 @@ begin
 
          Chart_GPUActive.Series[0].Add(DashboardWorker.WorkerList[GpuIndex].Gpu_Stats[i].Hash / 1000,
            'GPU-'+inttostr(i),TAlphaColor($FF667765));
+
          // Change for property
-        fan := fan + DashboardWorker.WorkerList[GpuIndex].Gpu_Stats[i].Fan;
+        DashboardWorker.fan := DashboardWorker.WorkerList[GpuIndex].Gpu_Stats[i].Fan;
+
+        // GPU status
+         DashboardWorker.TempMax :=  DashboardWorker.WorkerList[GpuIndex].Gpu_Stats[i].Temp;
        end;
 
-
+        //Shares
       With Chart_Shares.Series[0] do
          begin
            Clear;
@@ -239,11 +261,10 @@ begin
       Lbl_GpuValue.Text := inttostr(DashboardWorker.WorkerList[GpuIndex].Stats.Gpus_Online)+
               '/'+ inttostr(DashboardWorker.WorkerList[GpuIndex].Gpu_Stats.Count);
      // Change for property
-      fan := fan div DashboardWorker.WorkerList[GpuIndex].Gpu_Stats.Count;
     // Change for function
-      Lbl_fanValue.Text := inttostr(fan)+'%';
+      Lbl_fanValue.Text := inttostr(DashboardWorker.fan div DashboardWorker.WorkerList[GpuIndex].Gpu_Stats.Count)+'%';
       Lbl_Gputemp.Text := inttostr(DashboardWorker.TempMax) + '°';
-      butt_Worker.Text := DashboardWorker.WorkerList[0].Name;
+      butt_Worker.Text := DashboardWorker.WorkerList[GpuIndex].Name;
 end;
 
 procedure TF_FarmStatistics.Timer1Timer(Sender: TObject);

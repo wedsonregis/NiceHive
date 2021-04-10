@@ -2,7 +2,7 @@ object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 791
+  ClientHeight = 649
   ClientWidth = 369
   Position = DesktopCenter
   FormFactor.Width = 320
@@ -16,7 +16,7 @@ object FrmPrincipal: TFrmPrincipal
     Align = Client
     Fill.Color = xFF4B2A4F
     Size.Width = 369.000000000000000000
-    Size.Height = 791.000000000000000000
+    Size.Height = 649.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
   end
@@ -47,7 +47,7 @@ object FrmPrincipal: TFrmPrincipal
   object Lay_content: TLayout
     Align = Client
     Size.Width = 369.000000000000000000
-    Size.Height = 791.000000000000000000
+    Size.Height = 649.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 10
     object Lay_top: TLayout
@@ -217,7 +217,7 @@ object FrmPrincipal: TFrmPrincipal
     object Lay_bottom: TLayout
       Align = Bottom
       Margins.Bottom = 10.000000000000000000
-      Position.Y = 671.000000000000000000
+      Position.Y = 529.000000000000000000
       Size.Width = 369.000000000000000000
       Size.Height = 110.000000000000000000
       Size.PlatformDefault = False
@@ -566,7 +566,7 @@ object FrmPrincipal: TFrmPrincipal
       RightAxis.Title.Font.Size = 9.750000000000000000
       TopAxis.Title.Font.Family = 'Roboto Th'
       TopAxis.Title.Font.Size = 9.750000000000000000
-      View3DOptions.Elevation = 314
+      View3DOptions.Elevation = 315
       View3DOptions.HorizOffset = -3
       View3DOptions.OrthoAngle = 39
       View3DOptions.Orthogonal = False

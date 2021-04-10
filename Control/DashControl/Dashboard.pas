@@ -27,6 +27,8 @@ type
     FGpusOverheated: integer;
     FGpusOnline: integer;
     FWorkerId: integer;
+    FCurrencyPair: String;
+
 
     procedure SetFarmOffiline(const Value: Integer);
     procedure SetFarmOnline(const Value: Integer);
@@ -39,6 +41,7 @@ type
     procedure SetGpusOverheated(const Value: integer);
     procedure SetGpusTotal(const Value: integer);
     procedure SetWorkerId(const Value: integer);
+    procedure SetCurrencyPair(const Value: String);
 
   published
     procedure SetFarms(const Value: TObjectList<TDataFarmDTO>);
@@ -53,6 +56,7 @@ type
     property UnpaidAmount: String read FUnpaidAmount write SetUnpaidAmount;
     property Wallet: Double read FWallet write FWallet;
     property WorkerId : integer read FWorkerId write SetWorkerId;
+    property CurrencyPair : String read FCurrencyPair write SetCurrencyPair;
     Property Farms : TObjectList<TDataFarmDTO> read FFarms write SetFarms;
 
     Property GpusTotal : integer read FGpusTotal write SetGpusTotal;
@@ -71,6 +75,7 @@ type
     Function GetGpuStats():string;
     Function getUnpaidAmount():Double;
     Function getProfitability():Double;
+    Function GetFCurrencyPair():Double;
     function GetData: TObjectList<TDataFarmDTO>;
   end;
 
@@ -96,6 +101,7 @@ begin
     FGpusOffline:= 0;
     FGpusOverheated:= 0;
     FGpusOnline:= 0;
+    FCurrencyPair:='';
 end;
 
 destructor TRootDash.Destroy;
@@ -114,6 +120,11 @@ begin
   Result := FFarms;
 end;
 
+
+function TRootDash.GetFCurrencyPair: Double;
+begin
+      Result := strtofloat(DotsChanger(FCurrencyPair))
+end;
 
 class function TRootDash.DotsChanger(Value: string): String;
    var i:integer;
@@ -167,6 +178,11 @@ end;
 function TRootDash.getUnpaidAmount: Double;
 begin
       Result := StrToFloat(FUnpaidAmount);
+end;
+
+procedure TRootDash.SetCurrencyPair(const Value: String);
+begin
+  FCurrencyPair := Value;
 end;
 
 procedure TRootDash.SetFarmOffiline(const Value: Integer);
