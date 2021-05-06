@@ -6,7 +6,7 @@
         <MainSource>NiceHive.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>32785</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -192,6 +192,9 @@
         <DCCReference Include="Model\NicehashRig2.pas"/>
         <DCCReference Include="Control\DashControl\Workers.pas"/>
         <DCCReference Include="Model\CoibaseCurrency.pas"/>
+        <DCCReference Include="Model\Hiveon.pas"/>
+        <DCCReference Include="Model\CoibaseCurrencies.pas"/>
+        <DCCReference Include="Control\DashControl\AppUserConfigs.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -27,7 +27,10 @@ uses
   Loading in 'Viewer\Loading.pas',
   NicehashRig2 in 'Model\NicehashRig2.pas',
   Workers in 'Control\DashControl\Workers.pas',
-  CoibaseCurrency in 'Model\CoibaseCurrency.pas';
+  CoibaseCurrency in 'Model\CoibaseCurrency.pas',
+  Hiveon in 'Model\Hiveon.pas',
+  CoibaseCurrencies in 'Model\CoibaseCurrencies.pas',
+  AppUserConfigs in 'Control\DashControl\AppUserConfigs.pas';
 
 {$R *.res}
 

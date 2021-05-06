@@ -8,8 +8,10 @@ uses
   FMX.Layouts, FMX.ListBox, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Ani,
   FMXTee.Engine, FMXTee.Series, FMXTee.Series.OHLC, FMXTee.Series.Candle,
   FMXTee.Procs, FMXTee.Chart, FMX.Effects, FMX.Filter.Effects,ListFarm, WorkerinFarm,
-  Dashboard, FMXTee.Series.ActivityGauge, NicehashRig2,
-  FMXTee.Tools, FMXTee.Tools.PageNumber, FMXTee.Series.Donut
+  Dashboard, FMXTee.Series.ActivityGauge,
+  FMXTee.Tools, FMXTee.Tools.PageNumber, FMXTee.Series.Donut, FMX.MultiView,
+  FMX.Edit, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components
    {$IFDEF Android}
     ,Androidapi.Helpers,FMX.Helpers.Android,
     Androidapi.JNI.GraphicsContentViewText
@@ -21,7 +23,6 @@ type
     rect_transicao: TRectangle;
     FloatAnimation1: TFloatAnimation;
     Rectangle1: TRectangle;
-    Rec_ground: TRectangle;
     Rec_gradient: TRectangle;
     Lay_content: TLayout;
     Lay_top: TLayout;
@@ -56,6 +57,63 @@ type
     Chart_GPU: TChart;
     Lbl_Gputemp: TLabel;
     Series1: TDonutSeries;
+    StyleBook1: TStyleBook;
+    MultiView1: TMultiView;
+    VertScrollBox1: TVertScrollBox;
+    PoolMiningLayout: TLayout;
+    PrivacyLayout: TLayout;
+    PrivacyLabel: TLabel;
+    PrivacySwitch: TSwitch;
+    PrivacyImage: TImage;
+    FillRGBEffect3: TFillRGBEffect;
+    AggregateLayout: TLayout;
+    CloudLabel: TLabel;
+    CloudImage: TImage;
+    FillRGBEffect5: TFillRGBEffect;
+    label4: TLabel;
+    Swt_Nicehash: TSwitch;
+    Swt_Hiveon: TSwitch;
+    Label3: TLabel;
+    Label2: TLabel;
+    Swt_Binance: TSwitch;
+    Label1: TLabel;
+    Image2: TImage;
+    FillRGBEffect8: TFillRGBEffect;
+    CurrencyLayout: TLayout;
+    Label5: TLabel;
+    Image3: TImage;
+    ComBx_Currency: TComboBox;
+    FillRGBEffect2: TFillRGBEffect;
+    CryptoLayout: TLayout;
+    Label6: TLabel;
+    Image1: TImage;
+    ComBx_Crypto: TComboBox;
+    FillRGBEffect4: TFillRGBEffect;
+    FillRGBEffect6: TFillRGBEffect;
+    FillRGBEffect7: TFillRGBEffect;
+    BotomLayout: TLayout;
+    Image4: TImage;
+    FillRGBEffect9: TFillRGBEffect;
+    Label7: TLabel;
+    Layout1: TLayout;
+    Label8: TLabel;
+    Switch1: TSwitch;
+    Image5: TImage;
+    FillRGBEffect10: TFillRGBEffect;
+    Layout2: TLayout;
+    Label9: TLabel;
+    Switch2: TSwitch;
+    Image6: TImage;
+    FillRGBEffect11: TFillRGBEffect;
+    Image7: TImage;
+    FillRGBEffect12: TFillRGBEffect;
+    Lbl_currency: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    BindingsList1: TBindingsList;
+    LinkFillControlToPropertyText: TLinkFillControlToProperty;
+    LinkFillControlToPropertyText2: TLinkFillControlToProperty;
+    LinkFillControlToPropertyText3: TLinkFillControlToProperty;
     procedure FloatAnimation1Finish(Sender: TObject);
     procedure OpenFormEfect;
     procedure FormCreate(Sender: TObject);
@@ -65,6 +123,7 @@ type
     procedure Chart_GPUClickSeries(Sender: TCustomChart; Series: TChartSeries;
       ValueIndex: Integer; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
+    procedure PrivacySwitchSwitch(Sender: TObject);
   private
     { Private declarations }
     series : TActivityGauge;
@@ -74,6 +133,7 @@ type
     Function  CreateDashboard(Token, Wallet : String) : boolean;
     Procedure ShowDashboard();
     Procedure CreateGauge ();
+    procedure LoadCurrency;
   public
     { Public declarations }
     WorkerId : integer;
@@ -82,22 +142,27 @@ type
 var
   FrmPrincipal: TFrmPrincipal;
 
-  Const Token = 'Your tokem hiveos';
-  Const wallet = 'Your wallet mining Nicehash';
+   Const HiveToken = '';
 
-
+   //Coins configuration
+  Const hiveoncode = '';
+  Const NiceWallet = '';
 
 
   Const HiveApi = 'https://api2.hiveos.farm/api/v2';
   Const NiceApi = 'https://api2.nicehash.com/main/api/v2';
   Const CoinbaseAPI = 'https://api.coinbase.com/v2';
-  Const Currency = 'BRL';
+  const HiveonAPI = 'https://hiveon.net/api/v1';
+
+
+
 
 implementation
 
 {$R *.fmx}
 
-uses U_FarmStatistics, RESTRequest4D, Loading, CoibaseCurrency;
+uses U_FarmStatistics, RESTRequest4D, Loading, CoibaseCurrency, AppUserConfigs,
+      NicehashRig2,Hiveon, CoibaseCurrencies;
 
 procedure TFrmPrincipal.OpenFormEfect;
 begin
@@ -109,6 +174,11 @@ begin
     FloatAnimation1.Start;
 end;
 
+procedure TFrmPrincipal.PrivacySwitchSwitch(Sender: TObject);
+begin
+    LoadCurrency;
+end;
+
 procedure TFrmPrincipal.ShowDashboard;
 begin
       CreateGauge();
@@ -116,15 +186,16 @@ begin
       Lbl_PowerValue.Text :=  DashboardMain.GetPower;
       Lbl_ASRValue.Text :=  DashboardMain.GetGpuStats;
 
-      Lbl_UnpaidAmountValue.Text := 'R$'+formatfloat('0.00',DashboardMain.getUnpaidAmount
-          * DashboardMain.GetFCurrencyPair);
-      Lbl_ProfitabilityValue.Text :=  'R$'+formatfloat('0.00',DashboardMain.getProfitability
-          * DashboardMain.GetFCurrencyPair);
+      Lbl_UnpaidAmountValue.Text := formatfloat('0.00',DashboardMain.getUnpaidAmount *
+         DashboardMain.GetFCurrencyPair);
+
+      Lbl_ProfitabilityValue.Text := formatfloat('0.00',DashboardMain.getProfitability *
+           DashboardMain.GetFCurrencyPair);
 end;
 
 procedure TFrmPrincipal.Butt_reloadClick(Sender: TObject);
 begin
-   CreateDashboard(Token,Wallet);
+   CreateDashboard(HiveToken,NiceWallet);
 end;
 
 procedure TFrmPrincipal.Chart_GPUClickSeries(Sender: TCustomChart;
@@ -146,6 +217,8 @@ begin
         i : integer;
         NiceHashRig2 : TRootNicehashRig2;
         Coibase : TRootCoinbase;
+        SurpotedCurrency : TRootCoinSuported;
+        Hiveon : TRootHiveon;
     begin
      // FarmList
 
@@ -182,31 +255,54 @@ begin
              end;
           end;
 
+      // GET in coibase
+        LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/prices/'
+        +ComBx_Crypto.Items[ComBx_Crypto.ItemIndex]+'-'
+        +ComBx_Currency.Items[ComBx_Currency.ItemIndex]+'/buy')
+          .Accept('application/json')
+          .Get;
+
+        if LResponse.StatusCode = 200 then
+          begin
+              Coibase := TRootCoinbase.Create;
+              Coibase.AsJson := LResponse.Content;
+              DashboardMain.CurrencyPair := Coibase.Data.Amount;
+          end;
+
       // GET in nicehash
-      LResponse := TRequest.New.BaseURL(NiceApi+'/mining/external/'+Wallet+'/rigs2')
-        .Accept('application/json')
-        .Get;
-
-      if LResponse.StatusCode = 200 then
+     if Swt_Nicehash.IsChecked = true then
       begin
-          NiceHashRig2 := TRootNicehashRig2.Create;
-          NiceHashRig2.AsJson := LResponse.Content;
-          DashboardMain.UnpaidAmount := NiceHashRig2.UnpaidAmount;
-          DashboardMain.Profitability :=  NiceHashRig2.TotalProfitability;
+        LResponse := TRequest.New.BaseURL(NiceApi+'/mining/external/'+Wallet+'/rigs2')
+          .Accept('application/json')
+          .Get;
+
+        if LResponse.StatusCode = 200 then
+        begin
+            NiceHashRig2 := TRootNicehashRig2.Create;
+            NiceHashRig2.AsJson := LResponse.Content;
+            DashboardMain.UnpaidAmount := NiceHashRig2.UnpaidAmount;
+            DashboardMain.Profitability :=  NiceHashRig2.TotalProfitability;
+        end;
+       end
+        else
+      if Swt_Hiveon.IsChecked = true then
+        begin
+          // GET in Hiveon
+              LResponse := TRequest.New.BaseURL(HiveonAPI + '/stats/miner/'+hiveoncode+
+              '/ETH/billing-acc')
+                .Accept('application/json')
+                .Get;
+
+              if LResponse.StatusCode = 200 then
+              begin
+                  Hiveon := TRootHiveon.Create;
+                  Hiveon.AsJson := LResponse.Content;
+                  DashboardMain.Profitability := Hiveon.ExpectedReward24H;
+                  DashboardMain.UnpaidAmount :=  floattostr(Hiveon.TotalUnpaid);
+              end;
+
       end;
 
-       // GET in coibase
-      LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/prices/spot?currency='+Currency)
-        .Accept('application/json')
-        .Get;
-
-      if LResponse.StatusCode = 200 then
-      begin
-          Coibase := TRootCoinbase.Create;
-          Coibase.AsJson := LResponse.Content;
-          DashboardMain.CurrencyPair := Coibase.Data.Amount;
-          //DashboardMain.Currency :=  Coibase.Data.currency;
-      end;
 
       TThread.Synchronize(nil, procedure
       begin
@@ -214,6 +310,7 @@ begin
               ShowDashboard;
               NiceHashRig2.free;
               Coibase.Free;
+              Hiveon.free;
       end);
     end).Start;
 
@@ -237,6 +334,43 @@ begin
        Lbl_Gputemp.Text := inttostr(DashboardMain.FarmOnline) +'/'+ inttostr(DashboardMain.Farms.Count);
   end;
 
+end;
+
+procedure TFrmPrincipal.LoadCurrency;
+
+begin
+
+TLoading.Show(FrmPrincipal, 'Loading price');
+
+  TThread.CreateAnonymousThread(procedure
+      var
+        LResponse: IResponse;
+        SurpotedCurrency : TRootCoinSuported;
+  begin
+
+      LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/currencies')
+        .Accept('application/json')
+          .Get;
+    if LResponse.StatusCode = 200 then
+    begin
+      SurpotedCurrency := TRootCoinSuported.Create;
+      SurpotedCurrency.AsJson := LResponse.Content;
+      ComBx_Currency.Items.Clear;
+    end;
+
+        TThread.Synchronize(nil, procedure
+        var   i :integer;
+      begin
+        TLoading.Hide;
+
+        for I := 0 to pred(SurpotedCurrency.Data.Count) do
+          begin
+            ComBx_Currency.Items.Add(SurpotedCurrency.Data[i].Id);
+          end;
+
+          SurpotedCurrency.Free;
+      end);
+    end).Start;
 end;
 
 
@@ -284,7 +418,8 @@ end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
-  CreateDashboard(Token,Wallet);
+  CreateDashboard(HiveToken,NiceWallet);
+  // LoadCurrency;
 end;
 
 end.

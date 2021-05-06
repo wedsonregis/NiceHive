@@ -12,7 +12,7 @@ uses
   FMXTee.Series.Candle, FMXTee.Engine, FMXTee.Tools, FMXTee.Tools.PageNumber,
   FMXTee.Series.Donut, FMXTee.Procs, FMXTee.Chart, FMX.Effects,
   FMX.Filter.Effects, Workers, WorkerinFarm, FMXTee.Import, Radiant.Shapes,
-  FMX.Ani;
+  FMX.Ani, FMXTee.Series.ImagePoint;
 
 type
   TF_FarmStatistics = class(TForm)
@@ -58,6 +58,11 @@ type
     Label5: TLabel;
     Label6: TLabel;
     FloatAnimation1: TFloatAnimation;
+    Series5: TVolumeSeries;
+    Series6: TDeltaPointSeries;
+    Series7: THorizBarSeries;
+    Series8: THorizBarSeries;
+    Series9: THorizBarSeries;
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -69,6 +74,10 @@ type
     procedure Chart_GPUClickSeries(Sender: TCustomChart; Series: TChartSeries;
       ValueIndex: Integer; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
+    procedure Chart_GPUActiveClick(Sender: TObject);
+    procedure Chart_FanClick(Sender: TObject);
+    procedure Chart_SharesClick(Sender: TObject);
+    procedure Chart_GPUClick(Sender: TObject);
   private
     { Private declarations }
     DashboardWorker : TRootWorkers;
@@ -76,6 +85,8 @@ type
     Procedure ShowWorker(GpuIndex : integer);
     Procedure  CreateWorker(Token, FarmID :string);
     procedure ShowHints(X: Integer; Y: Integer; Index : Integer);
+
+    Procedure SwitchChar(value : integer);
   public
     { Public declarations }
   end;
@@ -98,12 +109,28 @@ end;
 procedure TF_FarmStatistics.butt_ReloadClick(Sender: TObject);
 begin
     CreateWorker(
-       Token,
+       HiveToken,
        inttostr(FrmPrincipal.WorkerId)
     );
 end;
 
 
+
+procedure TF_FarmStatistics.Chart_FanClick(Sender: TObject);
+begin
+   SwitchChar(1);
+end;
+
+procedure TF_FarmStatistics.Chart_GPUActiveClick(Sender: TObject);
+begin
+   SwitchChar(0);
+end;
+
+procedure TF_FarmStatistics.Chart_GPUClick(Sender: TObject);
+var i:integer;
+begin
+ SwitchChar(3);
+end;
 
 procedure TF_FarmStatistics.Chart_GPUClickSeries(Sender: TCustomChart;
   Series: TChartSeries; ValueIndex: Integer; Button: TMouseButton;
@@ -113,6 +140,11 @@ begin
 end;
 
 
+
+procedure TF_FarmStatistics.Chart_SharesClick(Sender: TObject);
+begin
+  SwitchChar(2);
+end;
 
 procedure TF_FarmStatistics.CreateWorker(Token, FarmID: string);
 begin
@@ -265,6 +297,18 @@ begin
       Lbl_fanValue.Text := inttostr(DashboardWorker.fan div DashboardWorker.WorkerList[GpuIndex].Gpu_Stats.Count)+'%';
       Lbl_Gputemp.Text := inttostr(DashboardWorker.TempMax) + '°';
       butt_Worker.Text := DashboardWorker.WorkerList[GpuIndex].Name;
+end;
+
+procedure TF_FarmStatistics.SwitchChar(value: integer);
+var i:integer;
+begin
+  for I := 0 to pred(Chart_Bar.SeriesCount) do
+  begin
+    if i = value then
+      Chart_Bar.Series[value].Active := true
+      else
+    Chart_Bar.Series[i].Active := false;
+  end;
 end;
 
 procedure TF_FarmStatistics.Timer1Timer(Sender: TObject);

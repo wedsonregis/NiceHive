@@ -30,6 +30,7 @@ type
     FCurrencyPair: String;
 
 
+
     procedure SetFarmOffiline(const Value: Integer);
     procedure SetFarmOnline(const Value: Integer);
     procedure SetHashRate(const Value: Integer);
@@ -63,6 +64,8 @@ type
     Property GpusOnline : integer read FGpusOnline write SetGpusOnline;
     Property GpusOffline : integer read FGpusOffline write SetGpusOffline;
     Property GpusOverheated : integer read FGpusOverheated write SetGpusOverheated;
+
+
 
     destructor Destroy;
     constructor Create();
@@ -184,6 +187,7 @@ procedure TRootDash.SetCurrencyPair(const Value: String);
 begin
   FCurrencyPair := Value;
 end;
+
 
 procedure TRootDash.SetFarmOffiline(const Value: Integer);
 begin

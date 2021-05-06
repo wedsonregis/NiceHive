@@ -2,7 +2,7 @@ object F_FarmStatistics: TF_FarmStatistics
   Left = 0
   Top = 0
   Caption = 'Farm Statistics'
-  ClientHeight = 649
+  ClientHeight = 782
   ClientWidth = 369
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -18,7 +18,7 @@ object F_FarmStatistics: TF_FarmStatistics
     Fill.Color = xFF4B2A4F
     Margins.Top = -150.000000000000000000
     Size.Width = 369.000000000000000000
-    Size.Height = 702.000000000000000000
+    Size.Height = 835.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
   end
@@ -49,17 +49,18 @@ object F_FarmStatistics: TF_FarmStatistics
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 369.000000000000000000
-    Size.Height = 552.000000000000000000
+    Size.Height = 685.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
+    DisableMouseWheel = True
     ShowScrollBars = False
     Viewport.Width = 369.000000000000000000
-    Viewport.Height = 552.000000000000000000
+    Viewport.Height = 685.000000000000000000
     object Lay_Bottom: TLayout
       Align = Top
       Position.Y = 426.000000000000000000
       Size.Width = 369.000000000000000000
-      Size.Height = 233.000000000000000000
+      Size.Height = 247.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 13
       object Chart_Bar: TChart
@@ -70,6 +71,7 @@ object F_FarmStatistics: TF_FarmStatistics
         Foot.Font.StyleExt = {00040000000200000004000000}
         LeftWall.Pen.Visible = False
         LeftWall.Size = 10
+        Legend.CheckBoxesStyle = cbsRadio
         Legend.Font.Color = claWhite
         Legend.Font.Brush.Color = claWhite
         Legend.Symbol.Gradient.EndColor = claOrange
@@ -77,8 +79,6 @@ object F_FarmStatistics: TF_FarmStatistics
         Legend.Title.Font.Style = []
         Legend.Title.Font.Color = claWhite
         Legend.Title.Font.Brush.Color = claWhite
-        Legend.Title.Text.Strings = (
-          'MH/s')
         Legend.Title.Transparency = 8
         Legend.Transparency = 94
         PrintProportional = False
@@ -88,7 +88,6 @@ object F_FarmStatistics: TF_FarmStatistics
           'TChart')
         Title.Visible = False
         BottomAxis.Automatic = False
-        BottomAxis.AutomaticMaximum = False
         BottomAxis.AutomaticMinimum = False
         BottomAxis.Axis.Visible = False
         BottomAxis.Grid.Color = x0CC0C0C0
@@ -97,7 +96,6 @@ object F_FarmStatistics: TF_FarmStatistics
         BottomAxis.LabelsFormat.Font.Brush.Color = claWhite
         BottomAxis.LabelsFormat.Frame.Visible = False
         BottomAxis.LabelsFormat.Shadow.Visible = False
-        BottomAxis.Maximum = 92.500000000000000000
         BottomAxis.Ticks.Visible = False
         BottomAxis.Title.Font.Color = claWhite
         BottomAxis.Title.Font.Brush.Color = claWhite
@@ -129,16 +127,17 @@ object F_FarmStatistics: TF_FarmStatistics
         View3DWalls = False
         Zoom.Brush.Kind = None
         Zoom.Pen.Fill.Color = claSilver
-        Align = Client
+        Align = Top
         BevelOuter = bvNone
         Color = claNull
         TabOrder = 0
         Size.Width = 369.000000000000000000
-        Size.Height = 233.000000000000000000
+        Size.Height = 241.000000000000000000
         Size.PlatformDefault = False
         ColorPaletteIndex = 6
         object Series3: THorizBarSeries
           HoverElement = []
+          Active = False
           BarBrush.Gradient.Direction = gdLeftRight
           BarBrush.Gradient.EndColor = claOrange
           BarPen.Color = claNull
@@ -178,8 +177,128 @@ object F_FarmStatistics: TF_FarmStatistics
           YValues.Name = 'Y'
           YValues.Order = loNone
         end
+        object Series7: THorizBarSeries
+          HoverElement = []
+          Active = False
+          BarBrush.Gradient.Direction = gdLeftRight
+          BarBrush.Gradient.EndColor = claOrange
+          BarPen.Color = claNull
+          BarPen.Fill.Color = claNull
+          Marks.Font.Color = claWhite
+          Marks.Font.Brush.Color = claWhite
+          Marks.Frame.Visible = False
+          Marks.Transparent = True
+          Marks.Visible = False
+          Marks.TextAlignment = taRightJustify
+          Marks.Style = smsPercent
+          Marks.Arrow.Color = x00FFFFFF
+          Marks.Arrow.EndStyle = esFlat
+          Marks.Arrow.Fill.Color = x00FFFFFF
+          Marks.Arrow.Visible = False
+          Marks.BackColor = x00FFFFE1
+          Marks.Callout.Arrow.Color = x00FFFFFF
+          Marks.Callout.Arrow.EndStyle = esFlat
+          Marks.Callout.Arrow.Fill.Color = x00FFFFFF
+          Marks.Callout.Arrow.Visible = False
+          Marks.Callout.ArrowHead = ahLine
+          Marks.Clip = True
+          Marks.TextAlign = taRightJustify
+          Marks.Color = x00FFFFE1
+          DataSource = Series2
+          SeriesColor = xFFF7631F
+          Transparency = 40
+          BarRound = brBothEnds
+          BarStyle = bsRoundRectangle
+          Gradient.Direction = gdLeftRight
+          Gradient.EndColor = claOrange
+          MultiBar = mbSideAll
+          XValues.Name = 'Barra'
+          XValues.Order = loNone
+          YValues.Name = 'Y'
+          YValues.Order = loNone
+        end
+        object Series8: THorizBarSeries
+          HoverElement = []
+          Active = False
+          BarBrush.Gradient.Direction = gdLeftRight
+          BarBrush.Gradient.EndColor = claOrange
+          BarPen.Color = claNull
+          BarPen.Fill.Color = claNull
+          Marks.Font.Color = claWhite
+          Marks.Font.Brush.Color = claWhite
+          Marks.Frame.Visible = False
+          Marks.Transparent = True
+          Marks.Visible = False
+          Marks.TextAlignment = taRightJustify
+          Marks.Style = smsPercent
+          Marks.Arrow.Color = x00FFFFFF
+          Marks.Arrow.EndStyle = esFlat
+          Marks.Arrow.Fill.Color = x00FFFFFF
+          Marks.Arrow.Visible = False
+          Marks.BackColor = x00FFFFE1
+          Marks.Callout.Arrow.Color = x00FFFFFF
+          Marks.Callout.Arrow.EndStyle = esFlat
+          Marks.Callout.Arrow.Fill.Color = x00FFFFFF
+          Marks.Callout.Arrow.Visible = False
+          Marks.Callout.ArrowHead = ahLine
+          Marks.Clip = True
+          Marks.TextAlign = taRightJustify
+          Marks.Color = x00FFFFE1
+          DataSource = DonutSeries1
+          SeriesColor = xFFFDE574
+          Transparency = 40
+          BarRound = brBothEnds
+          BarStyle = bsRoundRectangle
+          Gradient.Direction = gdLeftRight
+          Gradient.EndColor = claOrange
+          MultiBar = mbSideAll
+          XValues.Name = 'Barra'
+          XValues.Order = loNone
+          YValues.Name = 'Y'
+          YValues.Order = loNone
+        end
+        object Series9: THorizBarSeries
+          HoverElement = []
+          BarBrush.Gradient.Direction = gdLeftRight
+          BarBrush.Gradient.EndColor = claOrange
+          BarPen.Color = claNull
+          BarPen.Fill.Color = claNull
+          Marks.Font.Color = claWhite
+          Marks.Font.Brush.Color = claWhite
+          Marks.Frame.Visible = False
+          Marks.Transparent = True
+          Marks.Visible = False
+          Marks.TextAlignment = taRightJustify
+          Marks.Style = smsPercent
+          Marks.Arrow.Color = x00FFFFFF
+          Marks.Arrow.EndStyle = esFlat
+          Marks.Arrow.Fill.Color = x00FFFFFF
+          Marks.Arrow.Visible = False
+          Marks.BackColor = x00FFFFE1
+          Marks.Callout.Arrow.Color = x00FFFFFF
+          Marks.Callout.Arrow.EndStyle = esFlat
+          Marks.Callout.Arrow.Fill.Color = x00FFFFFF
+          Marks.Callout.Arrow.Visible = False
+          Marks.Callout.ArrowHead = ahLine
+          Marks.Clip = True
+          Marks.TextAlign = taRightJustify
+          Marks.Color = x00FFFFE1
+          DataSource = Series1
+          SeriesColor = xFFFDE574
+          Transparency = 40
+          BarRound = brBothEnds
+          BarStyle = bsRoundRectangle
+          Gradient.Direction = gdLeftRight
+          Gradient.EndColor = claOrange
+          MultiBar = mbSideAll
+          XValues.Name = 'Barra'
+          XValues.Order = loNone
+          YValues.Name = 'Y'
+          YValues.Order = loNone
+        end
       end
       object Chart_Lines: TChart
+        Position.Y = 241.000000000000000000
         BackWall.Pen.Color = x2EEDEBEB
         BackWall.Pen.Fill.Color = x2EEDEBEB
         BottomWall.Pen.Visible = False
@@ -225,13 +344,13 @@ object F_FarmStatistics: TF_FarmStatistics
         View3D = False
         Zoom.Brush.Kind = None
         Zoom.Pen.Fill.Color = claSilver
-        Align = Client
+        Align = Top
         BevelOuter = bvNone
         Color = claNull
         TabOrder = 1
         Visible = False
-        Size.Width = 378.000000000000000000
-        Size.Height = 245.000000000000000000
+        Size.Width = 369.000000000000000000
+        Size.Height = 241.000000000000000000
         Size.PlatformDefault = False
         ColorPaletteIndex = 13
         object Series4: TCandleSeries
@@ -246,6 +365,8 @@ object F_FarmStatistics: TF_FarmStatistics
           LowValues.Order = loNone
           OpenValues.Name = 'Abrir'
           OpenValues.Order = loNone
+          Active = False
+          DataSource = DonutSeries1
           CandleStyle = csLine
           DownCloseColor = xFFF14C14
           DownCloseGradient.StartColor = xFFF14C14
@@ -254,6 +375,56 @@ object F_FarmStatistics: TF_FarmStatistics
           HighLowPen.Fill.Color = x00FFFFFF
           UpCloseColor = xFF1D7B63
           UpCloseGradient.StartColor = xFF1D7B63
+          Data = {0000000000}
+        end
+        object Series5: TVolumeSeries
+          HoverElement = [heCurrent]
+          Active = False
+          DataSource = DonutSeries1
+          LinePen.Color = xFFF39C35
+          LinePen.Fill.Color = xFFF39C35
+          VolumeValues.Name = 'Y'
+          VolumeValues.Order = loNone
+          XValues.Name = 'X'
+          XValues.Order = loNone
+        end
+        object Series6: TDeltaPointSeries
+          HoverElement = [heCurrent]
+          DataSource = DonutSeries1
+          ClickableLine = False
+          Pointer.HorizSize = 16
+          Pointer.InflateMargins = True
+          Pointer.Pen.Visible = False
+          Pointer.Style = psRectangle
+          Pointer.VertSize = 16
+          XValues.Name = 'X'
+          XValues.Order = loNone
+          YValues.Name = 'Y'
+          YValues.Order = loNone
+          EqualImage.PNG = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            007F49444154384FB591810AC02008446DFFFFCF6E571A66DA68B107A349E779
+            5221227EBE234E0C5813E0B464A6932E32604EDA4B530DDA4B7E94B419C8DDA0
+            B006BD1993645AC5D6DEC427D82634C014BB8AAF2DFF2400BAB7DD3F025708A7
+            92E52B0031EB7A9FA02CA78DCD1514368192E508752FA1974C2B6CA32B7C84E8
+            06F2732A0F7829BB180000000049454E44AE426082}
+          GreaterImage.PNG = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            008049444154384FA591010EC020080371FFFFB3B3737588A0715E6294596AC9
+            9288E4B28E3831C84C805D13990E3ACF202FDA3BEDF51E48DC0CEA5DA7D0065F
+            33DED0EFE8DA98D804DBF806F0D7416DADF00D747CE27D2BC409383757908057
+            D8C1FC2F80AA6C7A9B20B52B8FBEF901854E40A21CAE6E157AC630C2361CE127
+            2237B930220DEFD283E60000000049454E44AE426082}
+          LowerImage.PNG = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            007F49444154384FA592810A80201043CFFEFF9FAD819379ED28EB8194B57B2E
+            A84544BFD62FFE083A1BE0AA54D25BCE09FAC3F4923DC60D2987C178B7445430
+            8771841EA3FB2CC90DB6B102E8B567DE2B6503D6D6FA0E2BC0004FE5AA242A68
+            0CB9BA7C3632D3971B4C89230F036C5C435702D85C157EC3ED4FDC869FF09188
+            133353220FD88027D80000000049454E44AE426082}
         end
       end
     end
@@ -384,6 +555,7 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
+          OnClick = Chart_SharesClick
           ColorPaletteIndex = 16
           object Lbl_SharesValue: TLabel
             Align = Center
@@ -414,7 +586,7 @@ object F_FarmStatistics: TF_FarmStatistics
             Marks.Tail.Margin = 2
             SeriesColor = x006699FF
             Title = 'DonutShares'
-            XValues.Order = loNone
+            XValues.Order = loAscending
             YValues.Name = 'Pizza'
             YValues.Order = loNone
             Frame.InnerBrush.Kind = Gradient
@@ -551,6 +723,7 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
+          OnClick = Chart_FanClick
           ColorPaletteIndex = 14
           object Lbl_FanValue: TLabel
             Align = Center
@@ -721,6 +894,7 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
+          OnClick = Chart_GPUActiveClick
           ColorPaletteIndex = 14
           object Lbl_GpuValue: TLabel
             Align = Center
@@ -750,7 +924,7 @@ object F_FarmStatistics: TF_FarmStatistics
             Marks.Tail.Margin = 2
             SeriesColor = x006699FF
             Title = 'DonutGPUs'
-            XValues.Order = loNone
+            XValues.Order = loAscending
             YValues.Name = 'Pizza'
             YValues.Order = loNone
             Frame.InnerBrush.Kind = Gradient
@@ -896,6 +1070,7 @@ object F_FarmStatistics: TF_FarmStatistics
       Size.Width = 369.000000000000000000
       Size.Height = 290.000000000000000000
       Size.PlatformDefault = False
+      OnClick = Chart_GPUClick
       ColorPaletteIndex = 14
       object Lbl_Gputemp: TLabel
         Align = Center
@@ -932,7 +1107,7 @@ object F_FarmStatistics: TF_FarmStatistics
         Marks.Tail.Margin = 2
         SeriesColor = x000B58F3
         Title = 'GPU'
-        XValues.Order = loNone
+        XValues.Order = loAscending
         YValues.Name = 'Pizza'
         YValues.Order = loNone
         Frame.InnerBrush.Kind = Gradient
