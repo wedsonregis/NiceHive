@@ -1,0 +1,20 @@
+{   
+    "coin" : [
+       {
+        "name":"BTC",
+        "base_id" : "5b71fc48-3dd3-540c-809b-f8c94d0e68b5" 
+       },
+       {
+        "name":"ETH",
+        "base_id" : "d85dce9b-5b73-5c3c-8978-522ce1d1c1b4"  
+       },
+       {
+        "name":"ETC",
+        "base_id" : "c16df856-0345-5358-8a70-2a78c804e61f" 
+       },
+       {
+        "name":"ERG",
+        "base_id" : "d8cde53c-0c49-5e9a-a962-655aecdc5097" 
+       }
+   ]
+}
