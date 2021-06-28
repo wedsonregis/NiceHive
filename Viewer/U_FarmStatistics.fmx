@@ -2,7 +2,7 @@ object F_FarmStatistics: TF_FarmStatistics
   Left = 0
   Top = 0
   Caption = 'Farm Statistics'
-  ClientHeight = 782
+  ClientHeight = 810
   ClientWidth = 369
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -18,7 +18,7 @@ object F_FarmStatistics: TF_FarmStatistics
     Fill.Color = xFF4B2A4F
     Margins.Top = -150.000000000000000000
     Size.Width = 369.000000000000000000
-    Size.Height = 835.000000000000000000
+    Size.Height = 910.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
   end
@@ -49,21 +49,22 @@ object F_FarmStatistics: TF_FarmStatistics
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 369.000000000000000000
-    Size.Height = 685.000000000000000000
+    Size.Height = 760.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     DisableMouseWheel = True
     ShowScrollBars = False
     Viewport.Width = 369.000000000000000000
-    Viewport.Height = 685.000000000000000000
+    Viewport.Height = 760.000000000000000000
     object Lay_Bottom: TLayout
-      Align = Top
-      Position.Y = 426.000000000000000000
+      Align = Bottom
+      Position.Y = 513.000000000000000000
       Size.Width = 369.000000000000000000
       Size.Height = 247.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 13
+      TabOrder = 14
       object Chart_Bar: TChart
+        Position.Y = 16.000000000000000000
         BackWall.Size = 10
         BottomWall.Size = 10
         Foot.Font.Color = claWhite
@@ -74,11 +75,15 @@ object F_FarmStatistics: TF_FarmStatistics
         Legend.CheckBoxesStyle = cbsRadio
         Legend.Font.Color = claWhite
         Legend.Font.Brush.Color = claWhite
+        Legend.LegendStyle = lsValues
         Legend.Symbol.Gradient.EndColor = claOrange
         Legend.TextStyle = ltsValue
         Legend.Title.Font.Style = []
         Legend.Title.Font.Color = claWhite
         Legend.Title.Font.Brush.Color = claWhite
+        Legend.Title.Text.Strings = (
+          'Degrees')
+        Legend.Title.TextAlignment = taCenter
         Legend.Title.Transparency = 8
         Legend.Transparency = 94
         PrintProportional = False
@@ -127,12 +132,12 @@ object F_FarmStatistics: TF_FarmStatistics
         View3DWalls = False
         Zoom.Brush.Kind = None
         Zoom.Pen.Fill.Color = claSilver
-        Align = Top
+        Align = Bottom
         BevelOuter = bvNone
         Color = claNull
         TabOrder = 0
         Size.Width = 369.000000000000000000
-        Size.Height = 241.000000000000000000
+        Size.Height = 231.000000000000000000
         Size.PlatformDefault = False
         ColorPaletteIndex = 6
         object Series3: THorizBarSeries
@@ -219,7 +224,6 @@ object F_FarmStatistics: TF_FarmStatistics
         end
         object Series8: THorizBarSeries
           HoverElement = []
-          Active = False
           BarBrush.Gradient.Direction = gdLeftRight
           BarBrush.Gradient.EndColor = claOrange
           BarPen.Color = claNull
@@ -259,17 +263,20 @@ object F_FarmStatistics: TF_FarmStatistics
         end
         object Series9: THorizBarSeries
           HoverElement = []
+          Active = False
           BarBrush.Gradient.Direction = gdLeftRight
           BarBrush.Gradient.EndColor = claOrange
           BarPen.Color = claNull
           BarPen.Fill.Color = claNull
+          Marks.Emboss.Clip = True
           Marks.Font.Color = claWhite
           Marks.Font.Brush.Color = claWhite
           Marks.Frame.Visible = False
+          Marks.Shadow.Clip = True
           Marks.Transparent = True
           Marks.Visible = False
           Marks.TextAlignment = taRightJustify
-          Marks.Style = smsPercent
+          Marks.Style = smsValue
           Marks.Arrow.Color = x00FFFFFF
           Marks.Arrow.EndStyle = esFlat
           Marks.Arrow.Fill.Color = x00FFFFFF
@@ -286,6 +293,7 @@ object F_FarmStatistics: TF_FarmStatistics
           DataSource = Series1
           SeriesColor = xFFFDE574
           Transparency = 40
+          ValueFormat = '0'
           BarRound = brBothEnds
           BarStyle = bsRoundRectangle
           Gradient.Direction = gdLeftRight
@@ -375,7 +383,6 @@ object F_FarmStatistics: TF_FarmStatistics
           HighLowPen.Fill.Color = x00FFFFFF
           UpCloseColor = xFF1D7B63
           UpCloseGradient.StartColor = xFF1D7B63
-          Data = {0000000000}
         end
         object Series5: TVolumeSeries
           HoverElement = [heCurrent]
@@ -430,18 +437,18 @@ object F_FarmStatistics: TF_FarmStatistics
     end
     object Lay_statsInfo: TLayout
       Align = Top
-      Margins.Top = 20.000000000000000000
-      Position.Y = 20.000000000000000000
+      Position.Y = 45.000000000000000000
       Size.Width = 369.000000000000000000
-      Size.Height = 116.000000000000000000
+      Size.Height = 89.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 12
-      object FlowLayout1: TFlowLayout
+      TabOrder = 13
+      object Flow_top: TFlowLayout
         Align = Client
         Size.Width = 369.000000000000000000
-        Size.Height = 116.000000000000000000
+        Size.Height = 97.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
+        Visible = False
+        TabOrder = 1
         Justify = Center
         JustifyLastLine = Center
         FlowDirection = LeftToRight
@@ -555,7 +562,6 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
-          OnClick = Chart_SharesClick
           ColorPaletteIndex = 16
           object Lbl_SharesValue: TLabel
             Align = Center
@@ -723,7 +729,6 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
-          OnClick = Chart_FanClick
           ColorPaletteIndex = 14
           object Lbl_FanValue: TLabel
             Align = Center
@@ -894,7 +899,6 @@ object F_FarmStatistics: TF_FarmStatistics
           Size.Width = 110.000000000000000000
           Size.Height = 113.000000000000000000
           Size.PlatformDefault = False
-          OnClick = Chart_GPUActiveClick
           ColorPaletteIndex = 14
           object Lbl_GpuValue: TLabel
             Align = Center
@@ -954,9 +958,242 @@ object F_FarmStatistics: TF_FarmStatistics
           end
         end
       end
+      object FlowLay_Top: TFlowLayout
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Size.Width = 359.000000000000000000
+        Size.Height = 89.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Justify = Center
+        JustifyLastLine = Center
+        FlowDirection = LeftToRight
+        HorizontalGap = 10.000000000000000000
+        VerticalGap = 5.000000000000000000
+        object Lay_Wallet: TLayout
+          Position.X = 11.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 81.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object Lbl_SharesValue2: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 20.000000000000000000
+            Position.Y = 37.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xFFAE587A
+            TextSettings.HorzAlign = Center
+            Text = '0%'
+            TabOrder = 2
+          end
+          object Lbl_WalletCaption: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = -6.000000000000000000
+            Position.Y = 54.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'Reported'
+            TabOrder = 0
+          end
+          object Label11: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = -25.000000000000000000
+            Position.Y = 19.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'Shares'
+            TabOrder = 3
+          end
+          object Label14: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 2.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '-----------------'
+            TabOrder = 1
+          end
+          object Button1: TButton
+            Opacity = 0.000000000000000000
+            Position.X = 16.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 75.000000000000000000
+            Size.Height = 65.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            OnClick = Button1Click
+          end
+        end
+        object Lay_NextPay: TLayout
+          Position.X = 126.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 81.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          OnClick = butt_DockerClick
+          object Lbl_FanValue2: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 20.000000000000000000
+            Position.Y = 37.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xFFAE587A
+            TextSettings.HorzAlign = Center
+            Text = '0%'
+            TabOrder = 2
+          end
+          object Lbl_UnpaidAmountCaption: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = -6.000000000000000000
+            Position.Y = 54.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'Speed'
+            TabOrder = 0
+          end
+          object Label10: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = -25.000000000000000000
+            Position.Y = 19.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'FAN'
+            TabOrder = 3
+          end
+          object Lbl_UnpaidAmountBtc: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 2.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '-----------------'
+            TabOrder = 1
+          end
+          object Button2: TButton
+            Opacity = 0.000000000000000000
+            Position.X = 15.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 75.000000000000000000
+            Size.Height = 65.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            OnClick = Button2Click
+          end
+        end
+        object Lay_InPay: TLayout
+          Position.X = 242.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 81.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Lbl_GpuValue2: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 20.000000000000000000
+            Position.Y = 37.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xFFAE587A
+            TextSettings.HorzAlign = Center
+            Text = '0/0'
+            TabOrder = 2
+          end
+          object Lbl_ProfitabilityCaption: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = -6.000000000000000000
+            Position.Y = 54.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'Online'
+            TabOrder = 0
+          end
+          object Lbl_currency: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = -25.000000000000000000
+            Position.Y = 19.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = 'GPU'
+            TabOrder = 3
+          end
+          object Lbl_ProfitabilityBtc: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 2.000000000000000000
+            Size.Width = 106.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '----------------'
+            TabOrder = 1
+          end
+          object Button3: TButton
+            Opacity = 0.000000000000000000
+            Position.X = 13.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 75.000000000000000000
+            Size.Height = 65.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            OnClick = Button3Click
+          end
+        end
+      end
     end
     object Chart_GPU: TChart
-      Position.Y = 136.000000000000000000
       BackWall.Pen.Visible = False
       BottomWall.Brush.Kind = Gradient
       BottomWall.Brush.Gradient.EndColor = claSilver
@@ -1062,11 +1299,11 @@ object F_FarmStatistics: TF_FarmStatistics
       Zoom.MinimumPixels = 10
       Zoom.Pen.Color = xF9C0C0C0
       Zoom.Pen.Fill.Color = xF9C0C0C0
-      Align = Top
+      Align = Center
       BevelOuter = bvNone
       BevelWidth = 2
       Color = claNull
-      TabOrder = 14
+      TabOrder = 15
       Size.Width = 369.000000000000000000
       Size.Height = 290.000000000000000000
       Size.PlatformDefault = False
@@ -1085,6 +1322,20 @@ object F_FarmStatistics: TF_FarmStatistics
         TextSettings.HorzAlign = Center
         Text = '0'#176
         TabOrder = 0
+        object Label15: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 35.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 69.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'GPU'
+          TabOrder = 0
+        end
       end
       object Series1: TDonutSeries
         HoverElement = []
@@ -1156,6 +1407,403 @@ object F_FarmStatistics: TF_FarmStatistics
         EnabledButton.Visible = True
       end
     end
+    object FlowLayout1: TFlowLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 359.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Justify = Center
+      JustifyLastLine = Center
+      FlowDirection = LeftToRight
+      HorizontalGap = 10.000000000000000000
+      VerticalGap = 5.000000000000000000
+      object Layout1: TLayout
+        Position.X = 11.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label7: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label8: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Reported'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label9: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'System time'
+          TabOrder = 3
+        end
+        object Label12: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+      object Layout2: TLayout
+        Position.X = 126.000000000000000000
+        Size.Width = 106.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Label13: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label16: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Speed'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label17: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Miner boot time'
+          TabOrder = 3
+        end
+        object Label18: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+      object Layout3: TLayout
+        Position.X = 242.000000000000000000
+        Size.Width = 106.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label19: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label20: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 107.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Online'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label21: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Power'
+          TabOrder = 3
+        end
+        object Label22: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+    end
+    object FlowLayout2: TFlowLayout
+      Align = Bottom
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 468.000000000000000000
+      Size.Width = 359.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Justify = Center
+      JustifyLastLine = Center
+      FlowDirection = LeftToRight
+      HorizontalGap = 10.000000000000000000
+      VerticalGap = 5.000000000000000000
+      object Layout4: TLayout
+        Position.X = 11.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label23: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label24: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Reported'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label25: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'GPU'
+          TabOrder = 3
+        end
+        object Label26: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 105.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+      object Layout5: TLayout
+        Position.X = 126.000000000000000000
+        Size.Width = 106.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Label27: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label28: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Speed'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label29: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Power'
+          TabOrder = 3
+        end
+        object Label30: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+      object Layout6: TLayout
+        Position.X = 242.000000000000000000
+        Size.Width = 106.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label31: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 20.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xFFAE587A
+          TextSettings.HorzAlign = Center
+          Text = '0'
+          TabOrder = 2
+        end
+        object Label32: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Position.Y = 70.000000000000000000
+          Size.Width = 107.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Online'
+          Visible = False
+          TabOrder = 0
+        end
+        object Label33: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Bottom = -25.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Fan'
+          TabOrder = 3
+        end
+        object Label34: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 2.000000000000000000
+          Position.Y = 58.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 12.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = '-----------'
+          Visible = False
+          TabOrder = 1
+        end
+      end
+    end
   end
   object Lay_nav: TLayout
     Align = Top
@@ -1163,25 +1811,26 @@ object F_FarmStatistics: TF_FarmStatistics
     Size.Width = 369.000000000000000000
     Size.Height = 47.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     TabOrder = 8
     object Rec_Navigation: TRectangle
       Align = Client
       Fill.Color = claNull
-      Margins.Left = 30.000000000000000000
-      Margins.Right = 30.000000000000000000
-      Size.Width = 309.000000000000000000
+      Margins.Left = 20.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Size.Width = 329.000000000000000000
       Size.Height = 47.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFFFFF3CF
       Stroke.Thickness = 2.000000000000000000
-      XRadius = 23.000000000000000000
-      YRadius = 23.000000000000000000
+      XRadius = 20.000000000000000000
+      YRadius = 20.000000000000000000
       object butt_Next: TSpeedButton
         Align = Right
         StyledSettings = [Family, Style]
-        Margins.Right = 10.000000000000000000
-        Position.X = 237.000000000000000000
-        Size.Width = 62.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 264.000000000000000000
+        Size.Width = 60.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = 'Next'
@@ -1191,9 +1840,9 @@ object F_FarmStatistics: TF_FarmStatistics
       object butt_Previous: TSpeedButton
         Align = Left
         StyledSettings = [Family, Style]
-        Margins.Left = 10.000000000000000000
-        Position.X = 10.000000000000000000
-        Size.Width = 73.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Size.Width = 60.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = 'Previous '
@@ -1262,8 +1911,8 @@ object F_FarmStatistics: TF_FarmStatistics
     Enabled = False
     Interval = 100
     OnTimer = Timer1Timer
-    Left = 256
-    Top = 352
+    Left = 304
+    Top = 240
   end
   object RadiantC_Stats: TRadiantCallout
     Fill.Color = xCFE0E0E0

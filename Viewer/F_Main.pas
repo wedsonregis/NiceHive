@@ -1,21 +1,21 @@
-unit F_Main;
+﻿unit F_Main;
 
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.ListBox, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Ani,
   FMXTee.Engine, FMXTee.Series, FMXTee.Series.OHLC, FMXTee.Series.Candle,
-  FMXTee.Procs, FMXTee.Chart, FMX.Effects, FMX.Filter.Effects,ListFarm, WorkerinFarm,
-  Dashboard, FMXTee.Series.ActivityGauge,
+  FMXTee.Procs, FMXTee.Chart, FMX.Effects, FMX.Filter.Effects,
+  FMXTee.Series.ActivityGauge,
   FMXTee.Tools, FMXTee.Tools.PageNumber, FMXTee.Series.Donut, FMX.MultiView,
-  FMX.Edit, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
-  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components
-   {$IFDEF Android}
-    ,Androidapi.Helpers,FMX.Helpers.Android,
-    Androidapi.JNI.GraphicsContentViewText
-    {$ENDIF}
+  FMX.Edit, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
+  System.IOUtils,
+  Dashboard, ListFarm, FlightSheet, PoolSettings, Coins,
+  RESTRequest4D, Loading, AppUserConfigs,WorkerinFarm
   ;
 
 type
@@ -24,39 +24,11 @@ type
     FloatAnimation1: TFloatAnimation;
     Rectangle1: TRectangle;
     Rec_gradient: TRectangle;
-    Lay_content: TLayout;
     Lay_top: TLayout;
     Butt_doker: TButton;
     Lbl_Dashboard: TLabel;
     Butt_reload: TButton;
     FillRGBEffect1: TFillRGBEffect;
-    Chart_line: TChart;
-    Series4: TCandleSeries;
-    Lay_bottom: TLayout;
-    FlowLay_botom: TFlowLayout;
-    Lay_Hashrate: TLayout;
-    Lbl_HashValue: TLabel;
-    Lbl_HashCaption: TLabel;
-    Lay_Power: TLayout;
-    Lbl_PowerValue: TLabel;
-    Lbl_PowerCaption: TLabel;
-    Lay_Asr: TLayout;
-    Lbl_ASRValue: TLabel;
-    Lbl_ASRCaption: TLabel;
-    Layout5: TLayout;
-    FlowLay_Top: TFlowLayout;
-    Lay_Wallet: TLayout;
-    Lbl_WalletValue: TLabel;
-    Lbl_WalletCaption: TLabel;
-    Lay_NextPay: TLayout;
-    Lbl_UnpaidAmountValue: TLabel;
-    Lbl_UnpaidAmountCaption: TLabel;
-    Lay_InPay: TLayout;
-    Lbl_ProfitabilityValue: TLabel;
-    Lbl_ProfitabilityCaption: TLabel;
-    Chart_GPU: TChart;
-    Lbl_Gputemp: TLabel;
-    Series1: TDonutSeries;
     StyleBook1: TStyleBook;
     MultiView1: TMultiView;
     VertScrollBox1: TVertScrollBox;
@@ -75,7 +47,7 @@ type
     Swt_Hiveon: TSwitch;
     Label3: TLabel;
     Label2: TLabel;
-    Swt_Binance: TSwitch;
+    Swt_2miners: TSwitch;
     Label1: TLabel;
     Image2: TImage;
     FillRGBEffect8: TFillRGBEffect;
@@ -107,319 +79,370 @@ type
     FillRGBEffect11: TFillRGBEffect;
     Image7: TImage;
     FillRGBEffect12: TFillRGBEffect;
-    Lbl_currency: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
     BindingsList1: TBindingsList;
     LinkFillControlToPropertyText: TLinkFillControlToProperty;
     LinkFillControlToPropertyText2: TLinkFillControlToProperty;
     LinkFillControlToPropertyText3: TLinkFillControlToProperty;
+    Label12: TLabel;
+    Swt_NanoPool: TSwitch;
+    Lay_content: TLayout;
+    Chart_line: TChart;
+    Series4: TCandleSeries;
+    Lay_bottom: TLayout;
+    FlowLay_botom: TFlowLayout;
+    Lay_Hashrate: TLayout;
+    Lbl_HashValue: TLabel;
+    Lbl_HashCaption: TLabel;
+    Lay_Power: TLayout;
+    Lbl_PowerValue: TLabel;
+    Lbl_PowerCaption: TLabel;
+    Lay_Asr: TLayout;
+    Lbl_ASRValue: TLabel;
+    Lbl_ASRCaption: TLabel;
+    Layout5: TLayout;
+    FlowLay_Top: TFlowLayout;
+    Lay_Wallet: TLayout;
+    Lbl_WalletValue: TLabel;
+    Lbl_WalletCaption: TLabel;
+    Label11: TLabel;
+    Label14: TLabel;
+    Lay_NextPay: TLayout;
+    Lbl_UnpaidAmountValue: TLabel;
+    Lbl_UnpaidAmountCaption: TLabel;
+    Label10: TLabel;
+    Lbl_UnpaidAmountBtc: TLabel;
+    Lay_InPay: TLayout;
+    Lbl_ProfitabilityValue: TLabel;
+    Lbl_ProfitabilityCaption: TLabel;
+    Lbl_currency: TLabel;
+    Lbl_ProfitabilityBtc: TLabel;
+    Chart_GPU: TChart;
+    Lbl_Gputemp: TLabel;
+    Label15: TLabel;
+    Series1: TDonutSeries;
+    ChartTool1: TPageNumTool;
     procedure FloatAnimation1Finish(Sender: TObject);
     procedure OpenFormEfect;
-    procedure FormCreate(Sender: TObject);
     procedure Butt_reloadClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Chart_GPUClickSeries(Sender: TCustomChart; Series: TChartSeries;
-      ValueIndex: Integer; Button: TMouseButton; Shift: TShiftState; X,
-      Y: Integer);
-    procedure PrivacySwitchSwitch(Sender: TObject);
+      ValueIndex: Integer; Button: TMouseButton; Shift: TShiftState;
+      X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    series : TActivityGauge;
-    HiveFarmList : TRootFarms;
-    DashboardMain : TRootDash;
+    function LoadJsonConfigs(const FileName: TFileName): String;
+    function ParseDelimite(str: String; index: Integer): string;
+    Function CreateDashboard(Token: string): boolean;
 
-    Function  CreateDashboard(Token, Wallet : String) : boolean;
-    Procedure ShowDashboard();
-    Procedure CreateGauge ();
-    procedure LoadCurrency;
+    procedure GaugCreate;
+    procedure SetLabelDash;
+    procedure GetPool;
+    procedure GetRig(Token: string);
+    procedure GetCoinbase();
   public
     { Public declarations }
-    WorkerId : integer;
+    HiveFarmList: TRootFarms;
+    DashboardMain: TRootDash;
+  end;
+
+type
+  TGlobalConfig = record
+    poolId: Integer;
+    coinId: Integer;
+    pool: TRootPoolSettings;
+    coin: TRootCoins;
+    fs: TRootFlightSheet;
   end;
 
 var
   FrmPrincipal: TFrmPrincipal;
+  Config: TGlobalConfig;
 
-   Const HiveToken = '';
+Const
+  HiveToken = '';
 
-   //Coins configuration
-  Const hiveoncode = '';
-  Const NiceWallet = '';
+  // Coins configuration
+Const
+  HiveApi = 'https://api2.hiveos.farm/api/v2';
 
-
-  Const HiveApi = 'https://api2.hiveos.farm/api/v2';
-  Const NiceApi = 'https://api2.nicehash.com/main/api/v2';
-  Const CoinbaseAPI = 'https://api.coinbase.com/v2';
-  const HiveonAPI = 'https://hiveon.net/api/v1';
-
-
-
+Const
+  CoinbaseAPI = 'https://www.coinbase.com/api/v2';
 
 implementation
 
 {$R *.fmx}
 
-uses U_FarmStatistics, RESTRequest4D, Loading, CoibaseCurrency, AppUserConfigs,
-      NicehashRig2,Hiveon, CoibaseCurrencies;
+uses U_FarmStatistics, System.JSON, F_Wallet;
 
 procedure TFrmPrincipal.OpenFormEfect;
 begin
-    rect_transicao.BringToFront;
-    FloatAnimation1.Tag := 1;
-    FloatAnimation1.Inverse := false;
-    FloatAnimation1.StartValue := FrmPrincipal.Height + 500;
-    FloatAnimation1.StopValue := 0;
-    FloatAnimation1.Start;
+  rect_transicao.BringToFront;
+  FloatAnimation1.Tag := 1;
+  FloatAnimation1.Inverse := false;
+  FloatAnimation1.StartValue := FrmPrincipal.Height + 500;
+  FloatAnimation1.StopValue := 0;
+  FloatAnimation1.Start;
 end;
 
-procedure TFrmPrincipal.PrivacySwitchSwitch(Sender: TObject);
+function TFrmPrincipal.ParseDelimite(str: String; index: Integer): string;
+var
+  sl: TStringList;
 begin
-    LoadCurrency;
+  sl := TStringList.Create;
+  sl.Delimiter := '|';
+  sl.DelimitedText := str;
+  result := sl[index];
+  sl.Free;
 end;
 
-procedure TFrmPrincipal.ShowDashboard;
+function TFrmPrincipal.LoadJsonConfigs(const FileName: TFileName): String;
+var
+  LStrings: TStringList;
 begin
-      CreateGauge();
-      Lbl_HashValue.Text := DashboardMain.GetHashRate;
-      Lbl_PowerValue.Text :=  DashboardMain.GetPower;
-      Lbl_ASRValue.Text :=  DashboardMain.GetGpuStats;
+  LStrings := TStringList.Create;
+  try
+    LStrings.Loadfromfile(TPath.GetDocumentsPath + PathDelim + FileName);
+    result := LStrings.text;
+  finally
+    FreeAndNil(LStrings);
+  end;
+end;
 
-      Lbl_UnpaidAmountValue.Text := formatfloat('0.00',DashboardMain.getUnpaidAmount *
-         DashboardMain.GetFCurrencyPair);
+procedure TFrmPrincipal.GaugCreate;
+var
+  i: Integer;
+begin
+  Chart_GPU.Series[0].Clear;
+  for i := 0 to pred(DashboardMain.Farms.Count) do
+  begin
+    with Chart_GPU.Series[0] do
+    begin
+      if DashboardMain.Farms[i].Stats.Workers_Online > 0 then
+        add(DashboardMain.Farms[i].ID, DashboardMain.Farms[i].Name,
+          DashboardMain.TfColor(i))
+      else
+        add(DashboardMain.Farms[i].ID, DashboardMain.Farms[i].Name,
+          TAlphaColor($57E36060));
+    end;
+    Lbl_Gputemp.text := inttostr(DashboardMain.FarmOnline) + '/' +
+      inttostr(DashboardMain.Farms.Count);
+  end;
+end;
 
-      Lbl_ProfitabilityValue.Text := formatfloat('0.00',DashboardMain.getProfitability *
-           DashboardMain.GetFCurrencyPair);
+procedure TFrmPrincipal.SetLabelDash;
+begin
+  Lbl_HashValue.text := DashboardMain.GetHashRate;
+  Lbl_PowerValue.text := DashboardMain.GetPower;
+  Lbl_ASRValue.text := DashboardMain.GetGpuStats;
+
+  Lbl_UnpaidAmountValue.text := formatfloat('0.00',
+    DashboardMain.getUnpaidAmount * DashboardMain.GetFCurrencyPair);
+  Lbl_ProfitabilityValue.text := formatfloat('0.00',
+    DashboardMain.getProfitability * DashboardMain.GetFCurrencyPair);
+  Lbl_ProfitabilityBtc.text := formatfloat('0.00000',
+    DashboardMain.getProfitability);
+  Lbl_UnpaidAmountBtc.text := formatfloat('0.00000',
+    DashboardMain.getUnpaidAmount);
+end;
+
+procedure TFrmPrincipal.GetCoinbase;
+var
+  LResponse: IResponse;
+  JSonValue: TJSonValue;
+  st: string;
+begin
+  LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/assets/prices/' +
+    Config.coin.Data[Config.coinId].Base_Id + '?base=' + ComBx_Currency.Items
+    [ComBx_Currency.ItemIndex]).Accept('application/json').Get;
+  if LResponse.StatusCode = 200 then
+  begin
+    st := LResponse.Content;
+    JSonValue := TJSonObject.ParseJSONValue(st);
+    DashboardMain.CurrencyPair := JSonValue.GetValue<string>
+      ('data.prices.latest');
+    JSonValue.Free;
+  end;
+end;
+
+procedure TFrmPrincipal.GetPool;
+var
+  i: Integer;
+  LResponse: IResponse;
+  JSonValue: TJSonValue;
+  st: string;
+begin
+  for i := 0 to pred(Config.fs.Data.Count) do
+  begin
+    if Config.fs.Data[i].Acctive = true then
+    begin
+      Config.poolId := Config.fs.Data[i].poolId;
+      Config.coinId := Config.fs.Data[i].coinId;
+
+      LResponse := TRequest.New.BaseURL
+        (format(Config.pool.Data[Config.poolId].Expression,
+        [Config.pool.Data[Config.poolId].Urlpool, Config.fs.Data[i].Wallet]))
+        .Accept('application/json').Get;
+      if LResponse.StatusCode = 200 then
+      begin
+        st := LResponse.Content;
+        JSonValue := TJSonObject.ParseJSONValue(st);
+        // Balance
+        if (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 0) = 'i')
+        then
+          DashboardMain.Profitability := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 1)) /
+            1000000000
+        else if (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 0) = 'b')
+        then
+          DashboardMain.Profitability := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 1)) /
+            1000000000000000000
+        else if (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 0) = 'f')
+        then
+          DashboardMain.Profitability := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId].Balance, 1));
+
+        // Balance_Unconfirmed
+        if ParseDelimite(Config.pool.Data[Config.poolId].Balance_Unconfirmed, 0)
+          = 'i' then
+          DashboardMain.UnpaidAmount := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId].Balance_Unconfirmed,
+            1)) / 1000000000
+        else if ParseDelimite(Config.pool.Data[Config.poolId]
+          .Balance_Unconfirmed, 0) = 'b' then
+          DashboardMain.UnpaidAmount := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId].Balance_Unconfirmed,
+            1)) / 1000000000000000000
+        else if ParseDelimite(Config.pool.Data[Config.poolId]
+          .Balance_Unconfirmed, 0) = 'f' then
+          DashboardMain.UnpaidAmount := JSonValue.GetValue<Double>
+            (ParseDelimite(Config.pool.Data[Config.poolId]
+            .Balance_Unconfirmed, 1));
+        JSonValue.Free;
+      end;
+
+    end;
+  end;
+end;
+
+procedure TFrmPrincipal.GetRig(Token: string);
+var
+  LResponse: IResponse;
+begin
+  LResponse := TRequest.New.BaseURL(HiveApi + '/farms')
+    .Accept('application/json').Token('bearer ' + Token).Get;
+  if LResponse.StatusCode = 200 then
+  begin
+    if Assigned(HiveFarmList) then
+      HiveFarmList.Free;
+
+    if Assigned(DashboardMain) then
+      DashboardMain.Free;
+
+    HiveFarmList := TRootFarms.Create;
+    HiveFarmList.AsJson := LResponse.Content;
+    DashboardMain := TRootDash.Create(HiveFarmList);
+  end;
 end;
 
 procedure TFrmPrincipal.Butt_reloadClick(Sender: TObject);
 begin
-   CreateDashboard(HiveToken,NiceWallet);
+  CreateDashboard(HiveToken);
 end;
 
 procedure TFrmPrincipal.Chart_GPUClickSeries(Sender: TCustomChart;
   Series: TChartSeries; ValueIndex: Integer; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-   OpenFormEfect;
-   WorkerId := DashboardMain.Farms[ValueIndex].Id;
-   //showmessage(IntToStr(WorkerId));
+  OpenFormEfect;
+  DashboardMain.ID := DashboardMain.Farms[ValueIndex].ID;
 end;
 
-function TFrmPrincipal.CreateDashboard(Token, Wallet: String): boolean;
+// create informations
+function TFrmPrincipal.CreateDashboard(Token: string): boolean;
 begin
-
   TLoading.Show(FrmPrincipal, 'Loading data');
-  TThread.CreateAnonymousThread(procedure
-      var
-        LResponse: IResponse;
-        i : integer;
-        NiceHashRig2 : TRootNicehashRig2;
-        Coibase : TRootCoinbase;
-        SurpotedCurrency : TRootCoinSuported;
-        Hiveon : TRootHiveon;
+  TThread.CreateAnonymousThread(
+    procedure
     begin
-     // FarmList
+      // Get Rigs
+      GetRig(Token);
+      // Get pool information
+      GetPool();
+      // Get Coinbase
+      GetCoinbase();
 
-         LResponse := TRequest.New.BaseURL( HiveApi +'/farms')
-          .Accept('application/json')
-          .Token('bearer '+token)
-          .Get;
-        if LResponse.StatusCode = 200 then
-          begin
-
-                if Assigned(HiveFarmList) then
-                    HiveFarmList.Free;
-
-                HiveFarmList := TRootFarms.Create;
-                HiveFarmList.AsJson := LResponse.Content;
-
-                if Assigned(DashboardMain) then
-                      DashboardMain.Free;
-
-                DashboardMain := TRootDash.Create;
-        //for
-          for I := 0 to pred(HiveFarmList.Data.Count) do
-             begin
-                 DashboardMain.HashRate:= HiveFarmList.Data[i].GetHashRate;
-                 DashboardMain.PowerDraw:= HiveFarmList.Data[i].Stats.Power_Draw;
-                 DashboardMain.ASR := HiveFarmList.Data[i].Stats.Asr;
-                 DashboardMain.FarmOnline := HiveFarmList.Data[i].Stats.Rigs_Online;
-                 DashboardMain.FarmOffiline := HiveFarmList.Data[i].Stats.Rigs_Offline;
-                 DashboardMain.GpusTotal := HiveFarmList.Data[i].Stats.Gpus_Total;
-                 DashboardMain.GpusOnline := HiveFarmList.Data[i].Stats.Gpus_Online;
-                 DashboardMain.GpusOffline := HiveFarmList.Data[i].Stats.Gpus_Offline;
-                 DashboardMain.GpusOverheated := HiveFarmList.Data[i].Stats.Gpus_Overheated;
-                 DashboardMain.SetFarms(HiveFarmList.GetData);
-             end;
-          end;
-
-      // GET in coibase
-        LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/prices/'
-        +ComBx_Crypto.Items[ComBx_Crypto.ItemIndex]+'-'
-        +ComBx_Currency.Items[ComBx_Currency.ItemIndex]+'/buy')
-          .Accept('application/json')
-          .Get;
-
-        if LResponse.StatusCode = 200 then
-          begin
-              Coibase := TRootCoinbase.Create;
-              Coibase.AsJson := LResponse.Content;
-              DashboardMain.CurrencyPair := Coibase.Data.Amount;
-          end;
-
-      // GET in nicehash
-     if Swt_Nicehash.IsChecked = true then
-      begin
-        LResponse := TRequest.New.BaseURL(NiceApi+'/mining/external/'+Wallet+'/rigs2')
-          .Accept('application/json')
-          .Get;
-
-        if LResponse.StatusCode = 200 then
+      TThread.Synchronize(nil,
+        procedure
         begin
-            NiceHashRig2 := TRootNicehashRig2.Create;
-            NiceHashRig2.AsJson := LResponse.Content;
-            DashboardMain.UnpaidAmount := NiceHashRig2.UnpaidAmount;
-            DashboardMain.Profitability :=  NiceHashRig2.TotalProfitability;
-        end;
-       end
-        else
-      if Swt_Hiveon.IsChecked = true then
-        begin
-          // GET in Hiveon
-              LResponse := TRequest.New.BaseURL(HiveonAPI + '/stats/miner/'+hiveoncode+
-              '/ETH/billing-acc')
-                .Accept('application/json')
-                .Get;
-
-              if LResponse.StatusCode = 200 then
-              begin
-                  Hiveon := TRootHiveon.Create;
-                  Hiveon.AsJson := LResponse.Content;
-                  DashboardMain.Profitability := Hiveon.ExpectedReward24H;
-                  DashboardMain.UnpaidAmount :=  floattostr(Hiveon.TotalUnpaid);
-              end;
-
-      end;
-
-
-      TThread.Synchronize(nil, procedure
-      begin
-              TLoading.Hide;
-              ShowDashboard;
-              NiceHashRig2.free;
-              Coibase.Free;
-              Hiveon.free;
-      end);
+          TLoading.Hide;
+          GaugCreate;
+          SetLabelDash;
+        end);
     end).Start;
 
 end;
-
-procedure TFrmPrincipal.CreateGauge;
-var i : integer;
-begin
-  Chart_GPU.Series[0].Clear;
-
-  for I := 0 to pred(DashboardMain.Farms.Count) do
-  begin
-   With Chart_GPU.Series[0] do
-      begin
-        if DashboardMain.Farms[i].Stats.Workers_Online > 0 then
-
-        add (DashboardMain.Farms[i].Id,DashboardMain.Farms[i].Name,DashboardMain.TfColor(i))
-         else
-         Add(DashboardMain.Farms[i].Id,DashboardMain.Farms[i].Name,TAlphaColor($57E36060))
-      end;
-       Lbl_Gputemp.Text := inttostr(DashboardMain.FarmOnline) +'/'+ inttostr(DashboardMain.Farms.Count);
-  end;
-
-end;
-
-procedure TFrmPrincipal.LoadCurrency;
-
-begin
-
-TLoading.Show(FrmPrincipal, 'Loading price');
-
-  TThread.CreateAnonymousThread(procedure
-      var
-        LResponse: IResponse;
-        SurpotedCurrency : TRootCoinSuported;
-  begin
-
-      LResponse := TRequest.New.BaseURL(CoinbaseAPI + '/currencies')
-        .Accept('application/json')
-          .Get;
-    if LResponse.StatusCode = 200 then
-    begin
-      SurpotedCurrency := TRootCoinSuported.Create;
-      SurpotedCurrency.AsJson := LResponse.Content;
-      ComBx_Currency.Items.Clear;
-    end;
-
-        TThread.Synchronize(nil, procedure
-        var   i :integer;
-      begin
-        TLoading.Hide;
-
-        for I := 0 to pred(SurpotedCurrency.Data.Count) do
-          begin
-            ComBx_Currency.Items.Add(SurpotedCurrency.Data[i].Id);
-          end;
-
-          SurpotedCurrency.Free;
-      end);
-    end).Start;
-end;
-
-
-
 
 procedure TFrmPrincipal.FloatAnimation1Finish(Sender: TObject);
 begin
-    if FloatAnimation1.Tag = 1 then
-    begin
-        FloatAnimation1.Tag := 0;
+  if FloatAnimation1.Tag = 1 then
+  begin
+    FloatAnimation1.Tag := 0;
 
-        if NOT Assigned(F_FarmStatistics) then
-            Application.CreateForm(TF_FarmStatistics, F_FarmStatistics);
-        F_FarmStatistics.Show;
-    end;
+    if NOT Assigned(F_FarmStatistics) then
+      Application.CreateForm(TF_FarmStatistics, F_FarmStatistics);
+    F_FarmStatistics.Show;
+    {
+      if NOT Assigned(F_flaghtSheet) then
+      Application.CreateForm(TF_flaghtSheet, F_flaghtSheet);
+      F_flaghtSheet.Show;
+    }
+  end;
 
-    FloatAnimation1.Inverse := NOT FloatAnimation1.Inverse;
-      if (NOT  FloatAnimation1.Inverse) then
-             //  CreateDashboard(Token,Wallet)
-             else
-     //F_FarmStatistics.CreateWorker(token,IntToStr(DashboardMain.workerid));
+  FloatAnimation1.Inverse := NOT FloatAnimation1.Inverse;
+  if (NOT FloatAnimation1.Inverse) then
+    // CreateDashboard(Token,Wallet)
+  else
+    // F_FarmStatistics.CreateWorker(token,IntToStr(DashboardMain.workerid));
 end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
 begin
-  {$IFDEF Android}
-  CallInUIThreadAndWaitFinishing(
-    procedure
+  rect_transicao.Visible := true;
+  rect_transicao.Margins.Top := FrmPrincipal.Height + 500;
+  try
+  // Load configuration
+    Config.fs := TRootFlightSheet.Create;
+    Config.fs.AsJson := LoadJsonConfigs('flaghtsheet.json');
+    Config.pool := TRootPoolSettings.Create;
+    Config.pool.AsJson := LoadJsonConfigs('pool.json');
+    Config.coin := TRootCoins.Create;
+    Config.coin.AsJson := LoadJsonConfigs('coin.json');
+  Except
+    on E: Exception do
     begin
-      TAndroidHelper.Activity.getWindow.setStatusBarColor($FF4B2A4F);
-    end
-    );
-    {$ENDIF}
-
-    rect_transicao.Visible := true;
-    rect_transicao.Margins.Top := FrmPrincipal.Height + 500;
+      TLoading.Hide;
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
 end;
 
 procedure TFrmPrincipal.FormDestroy(Sender: TObject);
 begin
   if Assigned(DashboardMain) then
-      DashboardMain.Free;
-  HiveFarmList.Free;
+    DashboardMain.Free;
+
+    HiveFarmList.Free;
+    Config.fs.Free;
+    Config.pool.Free;
+    Config.coin.Free;
 end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
-  CreateDashboard(HiveToken,NiceWallet);
-  // LoadCurrency;
+  CreateDashboard(HiveToken);
 end;
 
 end.

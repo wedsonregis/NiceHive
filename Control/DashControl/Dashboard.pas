@@ -18,68 +18,58 @@ type
     FID: Integer;
     FPowerDraw: Integer;
     FProfitability: Double;
-    FUnpaidAmount: String;
-    FWallet: Double;
+    FUnpaidAmount: Double;
     FDataArray: TArray<TDataFarmDTO>;
     FFarms: TObjectList<TDataFarmDTO>;
-    FGpusTotal: integer;
-    FGpusOffline: integer;
-    FGpusOverheated: integer;
-    FGpusOnline: integer;
-    FWorkerId: integer;
+    FGpusTotal: Integer;
+    FGpusOffline: Integer;
+    FGpusOverheated: Integer;
+    FGpusOnline: Integer;
+    FWorkerId: Integer;
     FCurrencyPair: String;
-
-
-
     procedure SetFarmOffiline(const Value: Integer);
     procedure SetFarmOnline(const Value: Integer);
     procedure SetHashRate(const Value: Integer);
     procedure SetPowerDraw(const Value: Integer);
     procedure SetProfitability(const Value: Double);
-    procedure SetUnpaidAmount(const Value: String);
-    procedure SetGpusOffline(const Value: integer);
-    procedure SetGpusOnline(const Value: integer);
-    procedure SetGpusOverheated(const Value: integer);
-    procedure SetGpusTotal(const Value: integer);
-    procedure SetWorkerId(const Value: integer);
+    procedure SetUnpaidAmount(const Value: Double);
+    procedure SetGpusOffline(const Value: Integer);
+    procedure SetGpusOnline(const Value: Integer);
+    procedure SetGpusOverheated(const Value: Integer);
+    procedure SetGpusTotal(const Value: Integer);
+    procedure SetWorkerId(const Value: Integer);
     procedure SetCurrencyPair(const Value: String);
-
-  published
+    function GetData: TObjectList<TDataFarmDTO>;
     procedure SetFarms(const Value: TObjectList<TDataFarmDTO>);
-
+  published
     property ASR: Double read FASR write FASR;
-    property FarmOffiline: Integer  read FFarmOffiline write SetFarmOffiline;
+    property FarmOffiline: Integer read FFarmOffiline write SetFarmOffiline;
     property FarmOnline: Integer read FFarmOnline write SetFarmOnline;
     property HashRate: Integer read FHashRate write SetHashRate;
     property ID: Integer read FID write FID;
     property PowerDraw: Integer read FPowerDraw write SetPowerDraw;
     property Profitability: Double read FProfitability write SetProfitability;
-    property UnpaidAmount: String read FUnpaidAmount write SetUnpaidAmount;
-    property Wallet: Double read FWallet write FWallet;
-    property WorkerId : integer read FWorkerId write SetWorkerId;
-    property CurrencyPair : String read FCurrencyPair write SetCurrencyPair;
-    Property Farms : TObjectList<TDataFarmDTO> read FFarms write SetFarms;
-
-    Property GpusTotal : integer read FGpusTotal write SetGpusTotal;
-    Property GpusOnline : integer read FGpusOnline write SetGpusOnline;
-    Property GpusOffline : integer read FGpusOffline write SetGpusOffline;
-    Property GpusOverheated : integer read FGpusOverheated write SetGpusOverheated;
-
-
-
+    property UnpaidAmount: Double read FUnpaidAmount write SetUnpaidAmount;
+    property WorkerId: Integer read FWorkerId write SetWorkerId;
+    property CurrencyPair: String read FCurrencyPair write SetCurrencyPair;
+    Property Farms: TObjectList<TDataFarmDTO> read FFarms write SetFarms;
+    Property GpusTotal: Integer read FGpusTotal write SetGpusTotal;
+    Property GpusOnline: Integer read FGpusOnline write SetGpusOnline;
+    Property GpusOffline: Integer read FGpusOffline write SetGpusOffline;
+    Property GpusOverheated: Integer read FGpusOverheated
+      write SetGpusOverheated;
+    // Events
     destructor Destroy;
-    constructor Create();
-    class function TfColor(temp: integer): TAlphaColor;
+    constructor Create(farm: TRootFarms);
+    class function TfColor(temp: Integer): TAlphaColor;
     class function DotsChanger(Value: string): String;
-
     //
-    Function GetHashRate():string;
-    Function GetPower():string;
-    Function GetGpuStats():string;
-    Function getUnpaidAmount():Double;
-    Function getProfitability():Double;
-    Function GetFCurrencyPair():Double;
-    function GetData: TObjectList<TDataFarmDTO>;
+    Function GetHashRate(): string;
+    Function GetPower(): string;
+    Function GetGpuStats(): string;
+    Function GetUnpaidAmount(): Double;
+    Function GetProfitability(): Double;
+    Function GetFCurrencyPair(): Double;
   end;
 
 implementation
@@ -89,27 +79,33 @@ uses
 
 { TFarmsDTO }
 
-constructor TRootDash.Create;
+constructor TRootDash.Create(farm: TRootFarms);
+var
+  i: Integer;
 begin
-    FASR:= 0;
-    FFarmOffiline:= 0;
-    FFarmOnline:= 0;
-    FHashRate:= 0;
-    FID:= 0;
-    FPowerDraw:= 0;
-    FProfitability:= 0;
-    FUnpaidAmount:= '0';
-    FWallet:= 0;
-    FGpusTotal:= 0;
-    FGpusOffline:= 0;
-    FGpusOverheated:= 0;
-    FGpusOnline:= 0;
-    FCurrencyPair:='';
+  FID := 0;
+  FProfitability := 0;
+  FUnpaidAmount := 0;
+  FCurrencyPair := '';
+
+  for i := 0 to pred(farm.Data.Count) do
+  begin
+    HashRate := farm.Data[i].GetHashRate;
+    PowerDraw := farm.Data[i].Stats.Power_Draw;
+    ASR := farm.Data[i].Stats.ASR;
+    FarmOnline := farm.Data[i].Stats.Rigs_Online;
+    FarmOffiline := farm.Data[i].Stats.Rigs_Offline;
+    GpusTotal := farm.Data[i].Stats.Gpus_Total;
+    GpusOnline := farm.Data[i].Stats.Gpus_Online;
+    GpusOffline := farm.Data[i].Stats.Gpus_Offline;
+    GpusOverheated := farm.Data[i].Stats.Gpus_Overheated;
+    SetFarms(farm.GetData);
+  end;
 end;
 
 destructor TRootDash.Destroy;
 begin
-   GetData.Free;
+  GetData.Free;
   inherited;
 end;
 
@@ -123,35 +119,41 @@ begin
   Result := FFarms;
 end;
 
-
 function TRootDash.GetFCurrencyPair: Double;
 begin
-      Result := strtofloat(DotsChanger(FCurrencyPair))
+  Result := strtofloat(DotsChanger(FCurrencyPair))
 end;
 
 class function TRootDash.DotsChanger(Value: string): String;
-   var i:integer;
+var
+  i: Integer;
 begin
-    if Value <>'' then begin
-        for i := 0 to Length(Value) do begin
-            if Value[i]='.' then Value[i]:=',';
-        end;
-     end;
-     Result := Value;
-end;
-
-class function TRootDash.TfColor(temp: integer): TAlphaColor;
-begin
-    case temp of
-     0 : Result := TAlphaColorRec.Coral;
-     1 : result := TAlphaColorRec.Chocolate;
-     2 : result := TAlphaColorRec.Peru;
-     3 : result := TAlphaColorRec.Orange;
-     else
-      result := TAlphaColorRec.Chocolate;
+  if Value <> '' then
+  begin
+    for i := 0 to Length(Value) do
+    begin
+      if Value[i] = '.' then
+        Value[i] := ',';
     end;
+  end;
+  Result := Value;
 end;
 
+class function TRootDash.TfColor(temp: Integer): TAlphaColor;
+begin
+  case temp of
+    0:
+      Result := TAlphaColorRec.Coral;
+    1:
+      Result := TAlphaColorRec.Chocolate;
+    2:
+      Result := TAlphaColorRec.Peru;
+    3:
+      Result := TAlphaColorRec.Orange;
+  else
+    Result := TAlphaColorRec.Chocolate;
+  end;
+end;
 
 procedure TRootDash.SetFarms(const Value: TObjectList<TDataFarmDTO>);
 begin
@@ -160,34 +162,38 @@ end;
 
 function TRootDash.GetGpuStats: string;
 begin
-   result := inttostr(FGpusOnline)+ '/' +inttostr(FGpusTotal);
+  Result := inttostr(FGpusOnline) + '/' + inttostr(FGpusTotal);
 end;
 
 function TRootDash.GetHashRate: string;
+var
+  hash: real;
 begin
-    result := copy(inttostr(FHashRate),1,length(inttostr(FHashRate))-3) +' MH/s';
+  hash := strtofloat(copy(inttostr(FHashRate), 1,
+    Length(inttostr(FHashRate)) - 3));
+  Result := FloatToStr(hash) + ' MH/s';
+
 end;
 
 function TRootDash.GetPower: string;
 begin
-   result := inttostr(FPowerDraw) +' KW';
+  Result := inttostr(FPowerDraw) + ' KW';
 end;
 
-function TRootDash.getProfitability: Double;
+function TRootDash.GetProfitability: Double;
 begin
-      Result :=  FProfitability;
+  Result := FProfitability;
 end;
 
-function TRootDash.getUnpaidAmount: Double;
+function TRootDash.GetUnpaidAmount: Double;
 begin
-      Result := StrToFloat(FUnpaidAmount);
+  Result := FUnpaidAmount;
 end;
 
 procedure TRootDash.SetCurrencyPair(const Value: String);
 begin
   FCurrencyPair := Value;
 end;
-
 
 procedure TRootDash.SetFarmOffiline(const Value: Integer);
 begin
@@ -199,23 +205,22 @@ begin
   FFarmOnline := FFarmOnline + Value;
 end;
 
-
-procedure TRootDash.SetGpusOffline(const Value: integer);
+procedure TRootDash.SetGpusOffline(const Value: Integer);
 begin
   FGpusOffline := FGpusOffline + Value;
 end;
 
-procedure TRootDash.SetGpusOnline(const Value: integer);
+procedure TRootDash.SetGpusOnline(const Value: Integer);
 begin
   FGpusOnline := FGpusOnline + Value;
 end;
 
-procedure TRootDash.SetGpusOverheated(const Value: integer);
+procedure TRootDash.SetGpusOverheated(const Value: Integer);
 begin
-  FGpusOverheated := FGpusOverheated +  Value;
+  FGpusOverheated := FGpusOverheated + Value;
 end;
 
-procedure TRootDash.SetGpusTotal(const Value: integer);
+procedure TRootDash.SetGpusTotal(const Value: Integer);
 begin
   FGpusTotal := FGpusTotal + Value;
 end;
@@ -235,12 +240,12 @@ begin
   FProfitability := Value;
 end;
 
-procedure TRootDash.SetUnpaidAmount(const Value: string);
+procedure TRootDash.SetUnpaidAmount(const Value: Double);
 begin
-  FUnpaidAmount := DotsChanger(Value);
+  FUnpaidAmount := Value;
 end;
 
-procedure TRootDash.SetWorkerId(const Value: integer);
+procedure TRootDash.SetWorkerId(const Value: Integer);
 begin
   FWorkerId := Value;
 end;

@@ -2,7 +2,7 @@ object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Main'
-  ClientHeight = 797
+  ClientHeight = 810
   ClientWidth = 369
   Fill.Color = xFF4B2A4F
   Fill.Kind = Solid
@@ -42,11 +42,11 @@ object FrmPrincipal: TFrmPrincipal
   object Lay_content: TLayout
     Align = Client
     Size.Width = 369.000000000000000000
-    Size.Height = 747.000000000000000000
+    Size.Height = 760.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 7
     object Chart_line: TChart
-      Position.Y = 160.000000000000000000
+      Position.Y = 110.000000000000000000
       BackWall.Pen.Color = x2EEDEBEB
       BackWall.Pen.Fill.Color = x2EEDEBEB
       BottomWall.Pen.Visible = False
@@ -86,7 +86,7 @@ object FrmPrincipal: TFrmPrincipal
       Color = claNull
       TabOrder = 0
       Visible = False
-      Size.Width = 388.000000000000000000
+      Size.Width = 369.000000000000000000
       Size.Height = 236.000000000000000000
       Size.PlatformDefault = False
       ColorPaletteIndex = 13
@@ -168,7 +168,7 @@ object FrmPrincipal: TFrmPrincipal
     object Lay_bottom: TLayout
       Align = Bottom
       Margins.Bottom = 10.000000000000000000
-      Position.Y = 627.000000000000000000
+      Position.Y = 640.000000000000000000
       Size.Width = 369.000000000000000000
       Size.Height = 110.000000000000000000
       Size.PlatformDefault = False
@@ -303,7 +303,7 @@ object FrmPrincipal: TFrmPrincipal
       Align = Top
       Margins.Bottom = 10.000000000000000000
       Size.Width = 369.000000000000000000
-      Size.Height = 100.000000000000000000
+      Size.Height = 105.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 10
       object FlowLay_Top: TFlowLayout
@@ -311,7 +311,7 @@ object FrmPrincipal: TFrmPrincipal
         Margins.Left = 5.000000000000000000
         Margins.Right = 5.000000000000000000
         Size.Width = 359.000000000000000000
-        Size.Height = 100.000000000000000000
+        Size.Height = 105.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         Justify = Center
@@ -321,7 +321,7 @@ object FrmPrincipal: TFrmPrincipal
         VerticalGap = 5.000000000000000000
         object Lay_Wallet: TLayout
           Size.Width = 113.000000000000000000
-          Size.Height = 98.000000000000000000
+          Size.Height = 105.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object Lbl_WalletValue: TLabel
@@ -336,12 +336,12 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.FontColor = xFFAE587A
             TextSettings.HorzAlign = Center
             Text = '*********'
-            TabOrder = 1
+            TabOrder = 2
           end
           object Lbl_WalletCaption: TLabel
             Align = Top
             StyledSettings = [Family, Style]
-            Position.Y = 56.000000000000000000
+            Position.Y = 70.000000000000000000
             Size.Width = 113.000000000000000000
             Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
@@ -364,13 +364,26 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.FontColor = xC9FEF2CF
             TextSettings.HorzAlign = Center
             Text = 'BRL'
-            TabOrder = 2
+            TabOrder = 3
+          end
+          object Label14: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 58.000000000000000000
+            Size.Width = 113.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '*********'
+            TabOrder = 1
           end
         end
         object Lay_NextPay: TLayout
           Position.X = 123.000000000000000000
           Size.Width = 113.000000000000000000
-          Size.Height = 98.000000000000000000
+          Size.Height = 105.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object Lbl_UnpaidAmountValue: TLabel
@@ -384,20 +397,20 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.Font.Size = 20.000000000000000000
             TextSettings.FontColor = xFFAE587A
             TextSettings.HorzAlign = Center
-            Text = '0.00001'
-            TabOrder = 1
+            Text = '0,00'
+            TabOrder = 2
           end
           object Lbl_UnpaidAmountCaption: TLabel
             Align = Top
             StyledSettings = [Family, Style]
-            Position.Y = 56.000000000000000000
+            Position.Y = 70.000000000000000000
             Size.Width = 113.000000000000000000
-            Size.Height = 22.000000000000000000
+            Size.Height = 21.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 18.000000000000000000
             TextSettings.FontColor = xC9FEF2CF
             TextSettings.HorzAlign = Center
-            Text = 'Next payment'
+            Text = 'Unpaid'
             TabOrder = 0
           end
           object Label10: TLabel
@@ -413,13 +426,26 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.FontColor = xC9FEF2CF
             TextSettings.HorzAlign = Center
             Text = 'BRL'
-            TabOrder = 2
+            TabOrder = 3
+          end
+          object Lbl_UnpaidAmountBtc: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 58.000000000000000000
+            Size.Width = 113.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '0.00001'
+            TabOrder = 1
           end
         end
         object Lay_InPay: TLayout
           Position.X = 246.000000000000000000
           Size.Width = 113.000000000000000000
-          Size.Height = 98.000000000000000000
+          Size.Height = 105.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object Lbl_ProfitabilityValue: TLabel
@@ -433,20 +459,20 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.Font.Size = 20.000000000000000000
             TextSettings.FontColor = xFFAE587A
             TextSettings.HorzAlign = Center
-            Text = '0.00001'
-            TabOrder = 1
+            Text = '0,00'
+            TabOrder = 2
           end
           object Lbl_ProfitabilityCaption: TLabel
             Align = Top
             StyledSettings = [Family, Style]
-            Position.Y = 56.000000000000000000
+            Position.Y = 70.000000000000000000
             Size.Width = 113.000000000000000000
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 18.000000000000000000
             TextSettings.FontColor = xC9FEF2CF
             TextSettings.HorzAlign = Center
-            Text = 'Within  24h'
+            Text = 'Last 24h'
             TabOrder = 0
           end
           object Lbl_currency: TLabel
@@ -462,13 +488,26 @@ object FrmPrincipal: TFrmPrincipal
             TextSettings.FontColor = xC9FEF2CF
             TextSettings.HorzAlign = Center
             Text = 'BRL'
-            TabOrder = 2
+            TabOrder = 3
+          end
+          object Lbl_ProfitabilityBtc: TLabel
+            Align = Top
+            StyledSettings = [Family, Style]
+            Margins.Top = 2.000000000000000000
+            Position.Y = 58.000000000000000000
+            Size.Width = 113.000000000000000000
+            Size.Height = 12.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xC9FEF2CF
+            TextSettings.HorzAlign = Center
+            Text = '0.00001'
+            TabOrder = 1
           end
         end
       end
     end
     object Chart_GPU: TChart
-      Position.Y = 180.000000000000000000
+      Position.Y = 185.000000000000000000
       BackWall.Pen.Visible = False
       BottomWall.Brush.Kind = Gradient
       BottomWall.Brush.Gradient.EndColor = claSilver
@@ -597,6 +636,20 @@ object FrmPrincipal: TFrmPrincipal
         TextSettings.HorzAlign = Center
         Text = '0'#176
         TabOrder = 0
+        object Label15: TLabel
+          Align = Top
+          StyledSettings = [Family, Style]
+          Margins.Top = 35.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 69.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xC9FEF2CF
+          TextSettings.HorzAlign = Center
+          Text = 'Rigs'
+          TabOrder = 0
+        end
       end
       object Series1: TDonutSeries
         HoverElement = []
@@ -1150,8 +1203,8 @@ object FrmPrincipal: TFrmPrincipal
           7400000C5442727573684F626A65637400095374796C654E616D65060A666F72
           6567726F756E640B42727573682E436F6C6F720708636C61426C61636B000000}
       end>
-    Left = 312
-    Top = 160
+    Left = 320
+    Top = 544
   end
   object MultiView1: TMultiView
     DrawerOptions.DurationSliding = 0.150000005960464500
@@ -1163,6 +1216,7 @@ object FrmPrincipal: TFrmPrincipal
     Size.Height = 747.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'MultiView1Style1'
+    Visible = False
     TabOrder = 10
     object VertScrollBox1: TVertScrollBox
       Align = Client
@@ -1177,7 +1231,7 @@ object FrmPrincipal: TFrmPrincipal
         Margins.Top = 5.000000000000000000
         Position.Y = 355.000000000000000000
         Size.Width = 250.000000000000000000
-        Size.Height = 97.000000000000000000
+        Size.Height = 126.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 12
         object label4: TLabel
@@ -1193,7 +1247,7 @@ object FrmPrincipal: TFrmPrincipal
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
           Text = 'NiceHash'
-          TabOrder = 0
+          TabOrder = 1
         end
         object Swt_Nicehash: TSwitch
           IsChecked = False
@@ -1203,17 +1257,17 @@ object FrmPrincipal: TFrmPrincipal
           Size.Width = 44.000000000000000000
           Size.Height = 26.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 4
+          TabOrder = 6
         end
         object Swt_Hiveon: TSwitch
-          IsChecked = True
+          IsChecked = False
           Margins.Left = 120.000000000000000000
           Position.X = 190.000000000000000000
           Position.Y = 36.000000000000000000
           Size.Width = 44.000000000000000000
           Size.Height = 26.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 5
+          TabOrder = 7
         end
         object Label3: TLabel
           StyledSettings = [Family]
@@ -1228,7 +1282,7 @@ object FrmPrincipal: TFrmPrincipal
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
           Text = 'HiveOn'
-          TabOrder = 1
+          TabOrder = 2
         end
         object Label2: TLabel
           StyledSettings = [Family]
@@ -1242,18 +1296,18 @@ object FrmPrincipal: TFrmPrincipal
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
-          Text = 'Binance'
-          TabOrder = 2
+          Text = '2miner'
+          TabOrder = 3
         end
-        object Swt_Binance: TSwitch
-          IsChecked = False
+        object Swt_2miners: TSwitch
+          IsChecked = True
           Margins.Left = 120.000000000000000000
           Position.X = 190.000000000000000000
           Position.Y = 8.000000000000000000
           Size.Width = 44.000000000000000000
           Size.Height = 26.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 6
+          TabOrder = 8
         end
         object Label1: TLabel
           StyledSettings = [Family]
@@ -1268,7 +1322,7 @@ object FrmPrincipal: TFrmPrincipal
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
           Text = 'Pool Mining'
-          TabOrder = 3
+          TabOrder = 5
         end
         object Image2: TImage
           MultiResBitmap.Height = 192
@@ -1399,6 +1453,31 @@ object FrmPrincipal: TFrmPrincipal
             Color = xC9FEF2CF
           end
         end
+        object Label12: TLabel
+          StyledSettings = [Family]
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 131.000000000000000000
+          Position.Y = 86.000000000000000000
+          Size.Width = 65.000000000000000000
+          Size.Height = 34.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = claWhite
+          Text = 'NanoPool'
+          TabOrder = 0
+        end
+        object Swt_NanoPool: TSwitch
+          IsChecked = False
+          Margins.Left = 120.000000000000000000
+          Position.X = 190.000000000000000000
+          Position.Y = 91.000000000000000000
+          Size.Width = 44.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+        end
       end
       object PrivacyLayout: TLayout
         Align = Top
@@ -1436,7 +1515,6 @@ object FrmPrincipal: TFrmPrincipal
           Size.PlatformDefault = False
           StyleLookup = 'PrivacySwitchStyle1'
           TabOrder = 1
-          OnSwitch = PrivacySwitchSwitch
         end
         object PrivacyImage: TImage
           MultiResBitmap.Height = 192
@@ -1538,7 +1616,7 @@ object FrmPrincipal: TFrmPrincipal
       object AggregateLayout: TLayout
         Align = Top
         Margins.Top = 35.000000000000000000
-        Position.Y = 487.000000000000000000
+        Position.Y = 516.000000000000000000
         Size.Width = 250.000000000000000000
         Size.Height = 62.000000000000000000
         Size.PlatformDefault = False
@@ -1554,7 +1632,7 @@ object FrmPrincipal: TFrmPrincipal
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
-          Text = ' Crypto Wallet'
+          Text = 'Fllight Sheet  Wallet'
           TabOrder = 0
         end
         object CloudImage: TImage
@@ -2272,7 +2350,7 @@ object FrmPrincipal: TFrmPrincipal
     Methods = <>
     OutputConverters = <>
     Left = 316
-    Top = 213
+    Top = 597
     object LinkFillControlToPropertyText: TLinkFillControlToProperty
       Category = 'Quick Bindings'
       Track = True

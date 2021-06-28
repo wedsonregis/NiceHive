@@ -1,0 +1,84 @@
+{
+    "pool":[
+    { 
+      "id":0,
+      "name":"Nanopool",
+      "COIN":"ERG",
+      "urlpool":"https://ergo.nanopool.org/api/v1",
+      "expression":"%s/load_account/%s",
+      "balance":"f|data.userParams.balance",
+      "balance_unconfirmed":"f|data.userParams.balance_unconfirmed", 
+      "min_payout": 5
+    },
+    {
+      "id":1,
+      "name":"2miners",
+      "COIN":"ETH",
+      "urlpool":"https://eth.2miners.com/api",
+      "expression":"%s/accounts/%s",
+      "balance":"i|24hreward",
+      "balance_unconfirmed":"i|stats.balance", 
+      "min_payout": 0.05
+    },
+    {
+      "id":2,
+      "name":"Hiveon",
+      "COIN":"ETH",
+      "urlpool":"https://hiveon.net/api/v1",
+      "expression":"%s/stats/miner/%s/ETH/billing-acc",
+      "balance":"f|expectedReward24H",
+      "balance_unconfirmed":"f|totalUnpaid", 
+      "min_payout": 0.1
+    },
+    {
+      "id":3, 
+      "name":"Hiveon",
+      "COIN":"ETC",
+      "urlpool":"https://hiveon.net/api/v1",
+      "expression":"%s/stats/miner/%s/ETC/billing-acc",
+      "balance":"f|expectedReward24H",
+      "balance_unconfirmed":"f|totalUnpaid", 
+      "min_payout": 0.1
+    },
+    {
+      "id":4,
+      "name":"Nicehash",
+      "COIN":"BTC",
+      "urlpool":"https://api2.nicehash.com/main/api/v2",
+      "expression":"%s/mining/external/%s/rigs2",
+      "balance":"f|totalProfitability",
+      "balance_unconfirmed":"f|unpaidAmount", 
+      "min_payout": 0.1
+    },
+    {
+      "id":5,
+      "name":"Ethermine",
+      "COIN":"ETC",
+      "urlpool":"https://api.ethermine.org",
+      "expression":"%s/miner/%s/currentStats",
+      "balance":"i|data.currentStatistics.unpaid",
+      "balance_unconfirmed":"i|data.coinsPerMin", 
+      "min_payout": 0.1
+    },
+    {
+      "id":6,
+      "name":"Herominers",
+      "COIN":"ERG",
+      "urlpool":"https://ergo.herominers.com/api",
+      "expression":"%s/stats_address?address=%s&longpoll=false",
+      "balance":"i|stats.balance",
+      "balance_unconfirmed":"i|stats.paid",
+      "min_payout": 1
+    },
+    {
+      "id":7,
+      "name":"Flexpool",
+      "COIN":"ETH",
+      "urlpool":"https://api.flexpool.io/v2",
+      "expression":"%s/miner/balance?coin=ETH&address=%s",
+      "balance":"b|result.balance",
+      "balance_unconfirmed":"b|result.balance",
+      "min_payout": 0.05
+    }
+    ]
+}

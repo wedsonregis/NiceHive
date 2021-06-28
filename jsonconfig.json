@@ -1,0 +1,19 @@
+{
+      "premium": false,
+      "privacy": true,
+      "fiat": {
+        "id": 0,
+        "name": "BRL",
+        "desc": "Real Brasileiro"
+      },
+      "crypto": "ETH",
+      "aggregatePay": false,
+      "multipleAccount": false,
+      "token": [
+        {
+          "id": 0,
+          "name": "HiveOs-Floripa",
+          "value": "ashjdajkshdjhbbrtuéwrtiuk9weqrhksdfhk"
+        }
+      ]
+    }

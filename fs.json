@@ -1,0 +1,83 @@
+{
+  "flightsheet":
+  [
+      {
+        "id":0,
+        "coinid": 3,
+        "wallet": "9fkEsioCXs11CbMoCzM8TCmRu2YanNBQYu8ZuTCypEgM9CqFox6",
+        "poolid": 0,
+        "acctive": true
+      },
+      {
+        "id":1,
+        "coinid": 1,
+        "wallet": "0b3e9acc676da59488e25926262527556f56cd00",
+        "poolid": 1,
+        "acctive": false
+      },
+      {
+        "id":2,
+        "coinid": 1,
+        "wallet": "0b3e9acc676da59488e25926262527556f56cd00",
+        "poolid": 2,
+        "acctive": false
+      }
+  ] ,
+
+  "pool":[
+      {
+        "name":"Nanopool",
+        "COIN":"ERG",
+        "urlpool":"https://ergo.nanopool.org/api/v1",
+        "expression":"%s/load_account/%s",
+        "balance":"f|data.userParams.balance",
+        "balance_unconfirmed":"f|data.userParams.balance_unconfirmed", 
+        "min_payout": 5
+      },
+      {
+        "name":"2miners",
+        "COIN":"ETH",
+        "urlpool":"https://eth.2miners.com/api",
+        "expression":"%s/accounts/%s",
+        "balance":"i|stats.balance",
+        "balance_unconfirmed":"i|24hreward", 
+        "min_payout": 0.05
+      },
+      {
+        "name":"Hiveon",
+        "COIN":"ETH",
+        "urlpool":"https://hiveon.net/api/v1",
+        "expression":"%s/stats/miner/%s/ETH/billing-acc",
+        "balance":"f|expectedReward24H",
+        "balance_unconfirmed":"f|totalUnpaid", 
+        "min_payout": 0.1
+      },
+      {
+        "name":"Hiveon",
+        "COIN":"ETC",
+        "urlpool":"https://hiveon.net/api/v1",
+        "expression":"%s/stats/miner/%s/ETC/billing-acc",
+        "balance":"f|expectedReward24H",
+        "balance_unconfirmed":"f|totalUnpaid", 
+        "min_payout": 0.1
+      }
+  ],
+   "coin" : [
+       {
+        "name":"BTC",
+        "base_id" : "5b71fc48-3dd3-540c-809b-f8c94d0e68b5" 
+       },
+       {
+        "name":"ETH",
+        "base_id" : "d85dce9b-5b73-5c3c-8978-522ce1d1c1b4"  
+       },
+       {
+        "name":"ETC",
+        "base_id" : "c16df856-0345-5358-8a70-2a78c804e61f" 
+       },
+       {
+        "name":"ERG",
+        "base_id" : "d8cde53c-0c49-5e9a-a962-655aecdc5097" 
+       }
+   ]
+}

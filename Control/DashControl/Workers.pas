@@ -57,10 +57,6 @@ type
 
 implementation
 
-
-
-
-
 { TFarmsDTO }
 
 constructor TRootWorkers.Create;

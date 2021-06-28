@@ -27,6 +27,31 @@ type
     property Temp: Integer read FTemp write FTemp;
   end;
 
+  TGpusDTO = class
+  private
+    FAmount: Integer;
+    FName: string;
+  published
+    property Amount: Integer read FAmount write FAmount;
+    property Name: string read FName write FName;
+  end;
+
+  TGpu_SummaryDTO = class
+  private
+    [JSONName('gpus')]
+    FGpusArray: TArray<TGpusDTO>;
+    [GenericListReflect]
+    FGpus: TObjectList<TGpusDTO>;
+    FMax_Fan: Integer;
+    FMax_Temp: Integer;
+    function GetGpus: TObjectList<TGpusDTO>;
+  published
+    property Gpus: TObjectList<TGpusDTO> read GetGpus;
+    property Max_Fan: Integer read FMax_Fan write FMax_Fan;
+    property Max_Temp: Integer read FMax_Temp write FMax_Temp;
+    destructor Destroy; override;
+  end;
+
   TSharesDTO = class
   private
     FAccepted: Integer;
@@ -124,6 +149,7 @@ type
     FGpu_StatsArray: TArray<TGpu_StatsDTO>;
     [GenericListReflect]
     FGpu_Stats: TObjectList<TGpu_StatsDTO>;
+    FGpu_Summary: TGpu_SummaryDTO;
     FId: Integer;
     FMiners_Summary: TMiners_SummaryDTO;
     FName: string;
@@ -136,6 +162,7 @@ type
     property Description: string read FDescription write FDescription;
     property Farm_Id: Integer read FFarm_Id write FFarm_Id;
     property Gpu_Stats: TObjectList<TGpu_StatsDTO> read GetGpu_Stats;
+    property Gpu_Summary: TGpu_SummaryDTO read FGpu_Summary write FGpu_Summary;
     property Id: Integer read FId write FId;
     property Miners_Summary: TMiners_SummaryDTO read FMiners_Summary write FMiners_Summary;
     property Name: string read FName write FName;
@@ -161,6 +188,23 @@ type
   end;
 
 implementation
+{ TGpu_SummaryDTO }
+
+destructor TGpu_SummaryDTO.Destroy;
+begin
+  GetGpus.Free;
+  inherited;
+end;
+
+function TGpu_SummaryDTO.GetGpus: TObjectList<TGpusDTO>;
+begin
+  if not Assigned(FGpus) then
+  begin
+    FGpus := TObjectList<TGpusDTO>.Create;
+    FGpus.AddRange(FGpusArray);
+  end;
+  Result := FGpus;
+end;
 
 { THashratesDTO }
 
@@ -219,12 +263,14 @@ begin
   inherited;
   FStats := TStatsDTO.Create;
   FMiners_Summary := TMiners_SummaryDTO.Create;
+  FGpu_Summary := TGpu_SummaryDTO.Create;
 end;
 
 destructor TDataWorkerDTO.Destroy;
 begin
   FStats.Free;
   FMiners_Summary.Free;
+  FGpu_Summary.Free;
   GetGpu_Stats.Free;
   inherited;
 end;

@@ -25,12 +25,18 @@ uses
   ListFarm in 'Model\ListFarm.pas',
   WorkerinFarm in 'Model\WorkerinFarm.pas',
   Loading in 'Viewer\Loading.pas',
-  NicehashRig2 in 'Model\NicehashRig2.pas',
   Workers in 'Control\DashControl\Workers.pas',
-  CoibaseCurrency in 'Model\CoibaseCurrency.pas',
-  Hiveon in 'Model\Hiveon.pas',
-  CoibaseCurrencies in 'Model\CoibaseCurrencies.pas',
-  AppUserConfigs in 'Control\DashControl\AppUserConfigs.pas';
+  AppUserConfigs in 'Control\DashControl\AppUserConfigs.pas',
+  F_Wallet in 'Viewer\F_Wallet.pas' {Form1},
+  FlightSheet in 'Model\FlightSheet.pas',
+  PoolSettings in 'Model\PoolSettings.pas',
+  Coins in 'Model\Coins.pas'
+  //
+  {$IFDEF Android}
+    , Androidapi.Helpers, FMX.Helpers.Android,
+      Androidapi.JNI.GraphicsContentViewText
+  {$ENDIF}
+  ;
 
 {$R *.res}
 
@@ -39,4 +45,12 @@ begin
   Application.Initialize;
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.Run;
+
+  {$IFDEF Android}
+  CallInUIThreadAndWaitFinishing(
+    procedure
+    begin
+      TAndroidHelper.Activity.getWindow.setStatusBarColor($FF4B2A4F);
+    end);
+{$ENDIF}
 end.
