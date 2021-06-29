@@ -36,8 +36,8 @@ pool.json Pools configuration file
     I prepared 3 parameters based on the calculation, you can try:
     
     "f|data.userParams.balance" (f) Float received from the "balance" pool: (0.574648347497753)
-    "i|stats.balance"           (i) Integr received from the "updatedAt" pool: (1624924815151)
-    "b|result.balance"          (b) bitcoin division integer received from the "balance" pool: (2748285944013025)
+    "i|stats.balance" (i) Integr received from the "updatedAt" pool: (1624924815151)
+    "b|result.balance" (b) bitcoin division integer received from the "balance" pool: (2748285944013025)
 
 ![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-02.PNG)
 ![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-03.PNG)
