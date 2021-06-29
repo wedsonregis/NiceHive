@@ -23,8 +23,13 @@ This section should list any major frameworks that you built your project using.
  * [Coinbase](https://developers.coinbase.com/api/v2)
  * [Hiveos](https://app.swaggerhub.com/apis/HiveOS/public/2.1-beta)
 
-![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-01.PNG)
-![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-03.PNG)
+<p align="center">
+    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-01.PNG" alt="" width="29%" height="29%">
+    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-02.PNG" alt="" width="29%" height="29%">
+    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-03.PNG" alt="" width="29%" height="29%">
+</p>
+
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -63,9 +68,9 @@ This section should list any major frameworks that you built your project using.
   * Balance Before navigating jason's nodes we need to know what kind of data we are going to collect. 
   I prepared 3 parameters based on the calculation, you can try:
 
-  "f|data.userParams.balance" (f) Float received from the "balance" pool: (0.574648347497753)
-  "i|stats.balance" (i) Integr received from the "updatedAt" pool: (1624924815151)
-  "b|result.balance" (b) bitcoin division integer received from the "balance" pool: (2748285944013025)
+  1. "`f`|data.userParams.balance" (`f`) Float received from the "balance" pool: (0.574648347497753)
+  2. "`i`|stats.balance" (`i`) Integr received from the "updatedAt" pool: (1624924815151)
+  3. "`b`|result.balance" (`b`) bitcoin division integer received from the "balance" pool: (2748285944013025)
   
 ### min_payout
   * Setting the minimum payout for the progress bar
