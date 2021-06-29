@@ -4,7 +4,7 @@
 There are many great templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one.
 
 Here's why:
-* Aggregate information from various Hiveos rigs
+* Aggregate information from multiple Hiveos platforms
 * Aggregate pool payments and earnings
 * Charts and statistics of rigs in hiveos
 
