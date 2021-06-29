@@ -1,18 +1,35 @@
 # NiceHive
-This project was developed in delphi using third party components and library,
 
- * Teechart (http://www.teechart.net/product/vcl)
- * RESTRequest4Delphi (https://github.com/viniciussanchez/RESTRequest4Delphi)
- * JsonToDelphi (https://github.com/marlonnardi/JsonToDelphi)
- * dataset-serialize (https://github.com/viniciussanchez/dataset-serialize)
- * Coinbase (https://developers.coinbase.com/api/v2)
- * Hiveos (https://app.swaggerhub.com/apis/HiveOS/public/2.1-beta)
+## About The Project
+There are many great templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one.
+
+Here's why:
+* Aggregate information from various Hiveos rigs
+* Aggregate pool payments and earnings
+* Charts and statistics of rigs in hiveos
+
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
+
+A list of commonly used resources that I find helpful are listed in the acknowledgements.
+
+### Built With
+
+This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+ * [Teechart](http://www.teechart.net/product/vcl)
+ * [RESTRequest4Delphi](https://github.com/viniciussanchez/RESTRequest4Delphi)
+ * [JsonToDelphi](https://github.com/marlonnardi/JsonToDelphi)
+ * [dataset-serialize](https://github.com/viniciussanchez/dataset-serialize)
+ * [Coinbase](https://developers.coinbase.com/api/v2)
+ * [Hiveos](https://app.swaggerhub.com/apis/HiveOS/public/2.1-beta)
 
 ![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-01.PNG)
 ![alt text](https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-03.PNG)
 
+<!-- GETTING STARTED -->
+## Getting Started
 
-pool.json Pools configuration file
+`pool.json` Pools configuration file
 ```json
  {
     "pool":[
@@ -99,7 +116,7 @@ GetPool the GetPool Method needs to be improved or could be implemented.
 ``` 
 
 
-flightsheet.json flight sheet configuration file
+`flightsheet.json` flight sheet configuration file
 ```json
  {
     "flightsheet":
