@@ -61,8 +61,8 @@ This section should list any major frameworks that you built your project using.
   * Include pool API uri without endpoints
   
 ### expression
-  * the expression must be assembled according to the api you want to consume, but two variables must be kept: "%s/load_account/%s"
-  First %s refers to previously passed uri. The second %s preserves the wallet that will be passed in the flightsheet.json file.
+  * the expression must be assembled according to the api you want to consume, but two variables must be kept: "`%s`/load_account/`%s`"
+  First `%s` refers to previously passed uri and, the second `%s` preserves the wallet that will be passed in the `flightsheet.json` file.
   
 ### balance and balance_unconfirmed
   * Balance Before navigating jason's nodes we need to know what kind of data we are going to collect. 
