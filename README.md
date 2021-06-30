@@ -16,7 +16,7 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
- * [Teechart](http://www.teechart.net/product/vcl)
+ * [Teechart](https://github.com/Steema)
  * [RESTRequest4Delphi](https://github.com/viniciussanchez/RESTRequest4Delphi)
  * [JsonToDelphi](https://github.com/marlonnardi/JsonToDelphi)
  * [dataset-serialize](https://github.com/viniciussanchez/dataset-serialize)
@@ -24,9 +24,9 @@ This section should list any major frameworks that you built your project using.
  * [Hiveos](https://app.swaggerhub.com/apis/HiveOS/public/2.1-beta)
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-01.PNG" alt="" width="29%" height="29%">
-    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-02.PNG" alt="" width="29%" height="29%">
-    <img src="https://raw.githubusercontent.com/wedsonregis/NiceHive/master/dashboard-03.PNG" alt="" width="29%" height="29%">
+    <img src="dashboard-01.PNG" alt="" width="29%" height="29%">
+    <img src="dashboard-02.PNG" alt="" width="29%" height="29%">
+    <img src="dashboard-03.PNG" alt="" width="29%" height="29%">
 </p>
 
 
@@ -131,7 +131,7 @@ GetPool the GetPool Method needs to be improved or could be implemented.
           "coinid": 3,
           "wallet": "9fkEsioCXs11CbMoCzM8TCmRu2YanNBQYu8ZuTCypEgM9CqFox6",
           "poolid": 0,
-          "acctive": false
+          "acctive": true
         }
     ]
  }
